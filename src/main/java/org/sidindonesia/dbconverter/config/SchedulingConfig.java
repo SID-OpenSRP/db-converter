@@ -1,4 +1,4 @@
-package org.sidindonesia.opensrpschemaconvert.config;
+package org.sidindonesia.dbconverter.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
