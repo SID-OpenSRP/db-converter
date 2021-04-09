@@ -22,3 +22,9 @@ spring:
         url: jdbc:postgresql://localhost:5432/opensrp_test
         username: postgres
         password: postgres
+        driverClassName: org.postgresql.Driver
+    target-datasource:
+        url: jdbc:postgresql://localhost:5432/dbconverter
+        username: postgres
+        password: postgres
+        driverClassName: org.postgresql.Driver
