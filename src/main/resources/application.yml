@@ -19,12 +19,14 @@ spring:
     application:
         name: db-converter
     datasource:
-        url: jdbc:postgresql://localhost:5432/opensrp_test
-        username: postgres
-        password: postgres
-        driverClassName: org.postgresql.Driver
+        name: source
+        jdbc-url: jdbc:postgresql://localhost:5432/opensrp_test
+        username: opensrp_admin
+        password: admin
+        driver-class-name: org.postgresql.Driver
     target-datasource:
-        url: jdbc:postgresql://localhost:5432/dbconverter
+        name: target
+        jdbc-url: jdbc:postgresql://localhost:5432/dbconverter
         username: postgres
         password: postgres
-        driverClassName: org.postgresql.Driver
+        driver-class-name: org.postgresql.Driver
