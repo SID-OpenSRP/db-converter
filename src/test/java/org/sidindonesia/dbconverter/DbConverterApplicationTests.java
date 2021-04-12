@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.sql.DataSource;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +35,7 @@ class DbConverterApplicationTests {
 	void contextLoads() {
 	}
 
+	@Disabled("Affects other integration tests")
 	@Test
 	void testChangeDataSource_assertThatSourceDataSourceIsPrimary() throws Exception {
 		assertThat(jdbcTemplate.getDataSource()).isEqualTo(sourceDataSource);

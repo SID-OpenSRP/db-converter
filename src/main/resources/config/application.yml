@@ -1,0 +1,55 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+fixedRate:
+  in:
+    milliseconds: 300000 # 5 minutes
+
+spring:
+  application:
+    name: db-converter
+  datasource:
+    name: source
+    jdbc-url: jdbc:postgresql://localhost:5432/opensrp_test
+    username: opensrp_admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  target-datasource:
+    name: target
+    jdbc-url: jdbc:postgresql://localhost:5432/dbconverter
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+source-database:
+  tables:
+  - name: core.client
+    columns:
+    - id
+    - json
+  - name: core.event
+    columns:
+    - id
+    - json
+  - name: core.client_metadata
+    columns:
+    - id
+    - client_id
+  - name: core.event_metadata
+    columns:
+    - id
+    - event_id
+
+target-database:
+  tables:
+    - identitas_ibu
