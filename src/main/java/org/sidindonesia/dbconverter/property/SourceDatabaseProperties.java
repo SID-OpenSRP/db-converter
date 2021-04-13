@@ -10,10 +10,4 @@ import lombok.Data;
 @Data
 public class SourceDatabaseProperties {
 	private Set<Table> tables;
-
-	@Data
-	public static class Table {
-		private String name;
-		private Set<String> columns;
-	}
 }
