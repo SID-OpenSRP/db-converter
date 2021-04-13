@@ -1,13 +1,18 @@
 package org.sidindonesia.dbconverter.service;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toMap;
 
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.sidindonesia.dbconverter.property.SourceDatabaseProperties;
 import org.sidindonesia.dbconverter.property.Table;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +24,28 @@ public class SourceDatabaseService {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private final SourceDatabaseProperties sourceDatabaseProperties;
 
-	public List<List<Object>> loadAll() {
+	public Map<String, List<Map<String, Object>>> loadAll() {
 		Set<Table> requiredTables = sourceDatabaseProperties.getTables();
 
-		return requiredTables.stream()
-			.map(table -> namedParameterJdbcTemplate.query(
-				"SELECT " + String.join(",", table.getColumns()) + " FROM " + table.getName() + " WHERE :id = 1",
-				new MapSqlParameterSource("id", 1), (resultSet, rowNum) -> resultSet.getObject("id")))
-			.collect(toList());
+		return requiredTables.stream().flatMap(table -> {
+
+			List<Map<String, Object>> resultSet = namedParameterJdbcTemplate.query(table.getQuery(),
+				(rs, rowNum) -> IntStream.rangeClosed(1, rs.getMetaData().getColumnCount()).mapToObj(i -> {
+					Map<String, Object> map = new HashMap<>();
+					try {
+						String columnName = rs.getMetaData().getColumnName(i);
+						map.put(columnName, ofNullable(rs.getObject(columnName)));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return map;
+				}).filter(map -> !map.isEmpty()).flatMap(map -> map.entrySet().stream())
+					.collect(toMap(Entry::getKey, Entry::getValue)));
+
+			Map<String, List<Map<String, Object>>> map = new HashMap<>();
+			map.put(table.getName(), resultSet);
+			return map.entrySet().stream();
+		}).collect(toMap(Entry::getKey, Entry::getValue));
 	}
 }

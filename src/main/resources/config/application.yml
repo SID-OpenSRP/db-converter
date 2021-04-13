@@ -34,21 +34,17 @@ spring:
 source-database:
   tables:
   - name: core.client
-    columns:
-    - id
-    - json
+    query: SELECT * FROM ${source-database.tables[0].name} WHERE id > ${source-database.tables[0].lastId}
+    lastId: 0
   - name: core.event
-    columns:
-    - id
-    - json
+    lastId: 0
+    query: SELECT * FROM ${source-database.tables[1].name} WHERE id > ${source-database.tables[1].lastId}
   - name: core.client_metadata
-    columns:
-    - id
-    - client_id
+    lastId: 0
+    query: SELECT * FROM ${source-database.tables[2].name} WHERE id > ${source-database.tables[2].lastId}
   - name: core.event_metadata
-    columns:
-    - id
-    - event_id
+    lastId: 0
+    query: SELECT * FROM ${source-database.tables[3].name} WHERE id > ${source-database.tables[3].lastId}
 
 target-database:
   tables:
