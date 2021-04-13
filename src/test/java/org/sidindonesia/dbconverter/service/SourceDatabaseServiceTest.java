@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.sidindonesia.dbconverter.property.SourceDatabaseProperties;
@@ -22,7 +23,7 @@ class SourceDatabaseServiceTest {
 
 	@Test
 	void testLoadAll() throws Exception {
-		Map<String, List<Map<String, Object>>> allResultSetJson = sourceDatabaseService.loadAll();
+		Map<String, List<Map<String, Optional<Object>>>> allResultSetJson = sourceDatabaseService.loadAll();
 
 		assertThat(allResultSetJson).isNotEmpty()
 			.containsOnlyKeys(sourceDatabaseProperties.getTables().stream().map(Table::getName).collect(toList()));

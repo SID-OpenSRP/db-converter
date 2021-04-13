@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.IntStream;
 
@@ -24,14 +25,14 @@ public class SourceDatabaseService {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private final SourceDatabaseProperties sourceDatabaseProperties;
 
-	public Map<String, List<Map<String, Object>>> loadAll() {
+	public Map<String, List<Map<String, Optional<Object>>>> loadAll() {
 		Set<Table> requiredTables = sourceDatabaseProperties.getTables();
 
 		return requiredTables.stream().flatMap(table -> {
 
-			List<Map<String, Object>> resultSet = namedParameterJdbcTemplate.query(table.getQuery(),
+			List<Map<String, Optional<Object>>> resultSet = namedParameterJdbcTemplate.query(table.getQuery(),
 				(rs, rowNum) -> IntStream.rangeClosed(1, rs.getMetaData().getColumnCount()).mapToObj(i -> {
-					Map<String, Object> map = new HashMap<>();
+					Map<String, Optional<Object>> map = new HashMap<>();
 					try {
 						String columnName = rs.getMetaData().getColumnName(i);
 						map.put(columnName, ofNullable(rs.getObject(columnName)));
@@ -43,7 +44,7 @@ public class SourceDatabaseService {
 				}).filter(map -> !map.isEmpty()).flatMap(map -> map.entrySet().stream())
 					.collect(toMap(Entry::getKey, Entry::getValue)));
 
-			Map<String, List<Map<String, Object>>> map = new HashMap<>();
+			Map<String, List<Map<String, Optional<Object>>>> map = new HashMap<>();
 			map.put(table.getName(), resultSet);
 			return map.entrySet().stream();
 		}).collect(toMap(Entry::getKey, Entry::getValue));
