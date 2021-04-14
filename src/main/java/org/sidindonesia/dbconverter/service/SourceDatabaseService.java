@@ -38,7 +38,7 @@ public class SourceDatabaseService {
 			List<Map<String, Object>> resultList = namedParameterJdbcTemplate.query(query, columnMapRowMapper::mapRow);
 
 			if (!resultList.isEmpty()) {
-				Object lastObjectId = resultList.get(resultList.size() - 1).get("id");
+				Object lastObjectId = resultList.get(resultList.size() - 1).get(table.getIdColumnName());
 				table.setLastId(lastObjectId);
 			}
 

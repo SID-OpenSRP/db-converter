@@ -23,7 +23,7 @@ spring:
     name: db-converter
   datasource:
     name: source
-    jdbc-url: jdbc:postgresql://localhost:5432/opensrp_test
+    jdbc-url: jdbc:postgresql://localhost:5432/opensrp
     username: opensrp_admin
     password: admin
     driver-class-name: org.postgresql.Driver
@@ -38,13 +38,15 @@ source-database:
   tables:
   - name: core.client
     query: SELECT * FROM ${source-database.tables[0].name}
-      WHERE id > %s
-      ORDER BY id ASC
+      WHERE ${source-database.tables[0].idColumnName} > %s
+      ORDER BY ${source-database.tables[0].idColumnName} ASC
+    idColumnName: id
     lastId: 0
   - name: core.event
     query: SELECT * FROM ${source-database.tables[1].name}
-      WHERE id > %s
-      ORDER BY id ASC
+      WHERE ${source-database.tables[1].idColumnName} > %s
+      ORDER BY ${source-database.tables[1].idColumnName} ASC
+    idColumnName: id
     lastId: 0
 
 target-database:
