@@ -7,13 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import org.sidindonesia.dbconverter.IntegrationTest;
 import org.sidindonesia.dbconverter.property.SourceDatabaseProperties;
 import org.sidindonesia.dbconverter.property.Table;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(properties = "scheduling.enabled=false")
-class SourceDatabaseServiceTest {
+class SourceDatabaseServiceTest extends IntegrationTest {
 	@Autowired
 	private SourceDatabaseService sourceDatabaseService;
 
