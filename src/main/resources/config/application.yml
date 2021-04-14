@@ -11,6 +11,9 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+scheduling:
+  enabled: true
+
 fixedRate:
   in:
     milliseconds: 300000 # 5 minutes
@@ -35,12 +38,12 @@ source-database:
   tables:
   - name: core.client
     query: SELECT * FROM ${source-database.tables[0].name}
-      WHERE id > ${source-database.tables[0].lastId}
+      WHERE id > %s
       ORDER BY id ASC
     lastId: 0
   - name: core.event
     query: SELECT * FROM ${source-database.tables[1].name}
-      WHERE id > ${source-database.tables[1].lastId}
+      WHERE id > %s
       ORDER BY id ASC
     lastId: 0
 

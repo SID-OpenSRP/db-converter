@@ -1,5 +1,6 @@
 package org.sidindonesia.dbconverter.service;
 
+import static java.lang.String.format;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 
@@ -33,11 +34,16 @@ public class SourceDatabaseService {
 
 		return requiredTables.stream().flatMap(table -> {
 
-			List<Map<String, Object>> resultSet = namedParameterJdbcTemplate.query(table.getQuery(),
-				columnMapRowMapper::mapRow);
+			String query = format(table.getQuery(), table.getLastId());
+			List<Map<String, Object>> resultList = namedParameterJdbcTemplate.query(query, columnMapRowMapper::mapRow);
+
+			if (!resultList.isEmpty()) {
+				Object lastObjectId = resultList.get(resultList.size() - 1).get("id");
+				table.setLastId(lastObjectId);
+			}
 
 			Map<String, List<Map<String, Object>>> map = new HashMap<>();
-			map.put(table.getName(), resultSet);
+			map.put(table.getName(), resultList);
 			return map.entrySet().stream();
 		}).collect(toMap(Entry::getKey, Entry::getValue));
 	}

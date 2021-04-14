@@ -12,7 +12,7 @@ import org.sidindonesia.dbconverter.property.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(properties = "scheduling.enabled=false")
 class SourceDatabaseServiceTest {
 	@Autowired
 	private SourceDatabaseService sourceDatabaseService;
