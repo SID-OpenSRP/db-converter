@@ -8,6 +8,6 @@ import lombok.Data;
 
 @ConfigurationProperties(prefix = "target-database")
 @Data
-public class TargetDataBaseProperties {
+public class TargetDatabaseProperties {
 	private List<String> tables;
 }

@@ -13,7 +13,7 @@ class DatabasePropertiesTest {
 	private SourceDatabaseProperties sourceDatabaseProperties;
 
 	@Autowired
-	private TargetDataBaseProperties targetDatabaseProperties;
+	private TargetDatabaseProperties targetDatabaseProperties;
 
 	@Test
 	void testAssertThatSourceDatabaseTablesIsNotEmpty() throws Exception {
