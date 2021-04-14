@@ -23,9 +23,9 @@ class SourceDatabaseServiceTest {
 
 	@Test
 	void testLoadAll() throws Exception {
-		Map<String, List<Map<String, Optional<Object>>>> allResultSetJson = sourceDatabaseService.loadAll();
+		Map<String, List<Map<String, Optional<Object>>>> allResultSet = sourceDatabaseService.loadAll();
 
-		assertThat(allResultSetJson).isNotEmpty()
+		assertThat(allResultSet).isNotEmpty()
 			.containsOnlyKeys(sourceDatabaseProperties.getTables().stream().map(Table::getName).collect(toList()));
 	}
 }

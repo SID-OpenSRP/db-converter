@@ -34,17 +34,15 @@ spring:
 source-database:
   tables:
   - name: core.client
-    query: SELECT * FROM ${source-database.tables[0].name} WHERE id > ${source-database.tables[0].lastId}
+    query: SELECT * FROM ${source-database.tables[0].name}
+      WHERE id > ${source-database.tables[0].lastId}
+      ORDER BY id ASC
     lastId: 0
   - name: core.event
+    query: SELECT * FROM ${source-database.tables[1].name}
+      WHERE id > ${source-database.tables[1].lastId}
+      ORDER BY id ASC
     lastId: 0
-    query: SELECT * FROM ${source-database.tables[1].name} WHERE id > ${source-database.tables[1].lastId}
-  - name: core.client_metadata
-    lastId: 0
-    query: SELECT * FROM ${source-database.tables[2].name} WHERE id > ${source-database.tables[2].lastId}
-  - name: core.event_metadata
-    lastId: 0
-    query: SELECT * FROM ${source-database.tables[3].name} WHERE id > ${source-database.tables[3].lastId}
 
 target-database:
   tables:
