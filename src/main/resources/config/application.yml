@@ -51,4 +51,21 @@ source-database:
 
 target-database:
   tables:
-    - identitas_ibu
+  - name: sid3.client_ibu
+    sourceTableName: ${source-database.tables[0].name}
+    columns:
+    - name: document_id
+      type: varchar(75)
+      sourceColumnType: json
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: date_created
+      type: timestamp
+      sourceColumnType: json
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: base_entity_id
+      type: varchar(75)
+      sourceColumnType: json
+      sourceColumnName: json
+      jsonPath: $.baseEntityId

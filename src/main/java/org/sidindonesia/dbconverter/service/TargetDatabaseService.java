@@ -21,6 +21,10 @@ public class TargetDatabaseService {
 	private final TargetDatabaseProperties targetDatabaseProperties;
 
 	public void processRowsFromSource(Map<String, List<Map<String, Object>>> allRequiredTables) {
-		// TODO Auto-generated method stub
+		targetDatabaseProperties.getTables().stream().map(targetTable -> {
+			List<Map<String, Object>> sourceResultList = allRequiredTables.get(targetTable.getSourceTableName());
+			sourceResultList.stream().map(sourceRow -> sourceRow);
+			return targetTable;
+		});
 	}
 }

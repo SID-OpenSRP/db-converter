@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.IntStream;
 
 import org.sidindonesia.dbconverter.property.SourceDatabaseProperties;
-import org.sidindonesia.dbconverter.property.Table;
+import org.sidindonesia.dbconverter.property.SourceTable;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class SourceDatabaseService {
 	private final ColumnMapRowMapper columnMapRowMapper;
 
 	public Map<String, List<Map<String, Object>>> loadAll() {
-		Set<Table> requiredTables = sourceDatabaseProperties.getTables();
+		Set<SourceTable> requiredTables = sourceDatabaseProperties.getTables();
 
 		return requiredTables.stream().flatMap(table -> {
 

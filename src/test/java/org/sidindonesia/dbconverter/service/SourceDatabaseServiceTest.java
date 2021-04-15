@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sidindonesia.dbconverter.IntegrationTest;
 import org.sidindonesia.dbconverter.property.SourceDatabaseProperties;
-import org.sidindonesia.dbconverter.property.Table;
+import org.sidindonesia.dbconverter.property.SourceTable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 class SourceDatabaseServiceTest extends IntegrationTest {
@@ -24,6 +24,6 @@ class SourceDatabaseServiceTest extends IntegrationTest {
 		Map<String, List<Map<String, Object>>> allResultSet = sourceDatabaseService.loadAll();
 
 		assertThat(allResultSet).isNotEmpty()
-			.containsOnlyKeys(sourceDatabaseProperties.getTables().stream().map(Table::getName).collect(toList()));
+			.containsOnlyKeys(sourceDatabaseProperties.getTables().stream().map(SourceTable::getName).collect(toList()));
 	}
 }

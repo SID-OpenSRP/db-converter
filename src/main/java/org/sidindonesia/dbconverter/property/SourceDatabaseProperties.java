@@ -9,5 +9,5 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "source-database")
 @Data
 public class SourceDatabaseProperties {
-	private Set<Table> tables;
+	private Set<SourceTable> tables;
 }

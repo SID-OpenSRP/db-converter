@@ -20,6 +20,8 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	// https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path
+	implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.5.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
