@@ -43,7 +43,7 @@ public class SourceDatabaseService {
 			}
 
 			Map<String, List<Map<String, Object>>> map = new HashMap<>();
-			map.put(table.getName(), resultList);
+			map.put(table.getTargetTableName(), resultList);
 			return map.entrySet().stream();
 		}).collect(toMap(Entry::getKey, Entry::getValue));
 	}

@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class TargetTable {
 	private String name;
-	private String sourceTableName;
 	private Set<TargetColumn> columns;
 
 	@Data

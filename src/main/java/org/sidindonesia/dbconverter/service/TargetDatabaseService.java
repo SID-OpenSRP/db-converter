@@ -22,7 +22,7 @@ public class TargetDatabaseService {
 
 	public void processRowsFromSource(Map<String, List<Map<String, Object>>> allRequiredTables) {
 		targetDatabaseProperties.getTables().stream().map(targetTable -> {
-			List<Map<String, Object>> sourceResultList = allRequiredTables.get(targetTable.getSourceTableName());
+			List<Map<String, Object>> sourceResultList = allRequiredTables.get(targetTable.getName());
 			sourceResultList.stream().map(sourceRow -> sourceRow);
 			return targetTable;
 		});

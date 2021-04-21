@@ -23,7 +23,7 @@ class SourceDatabaseServiceTest extends IntegrationTest {
 	void testLoadAll() throws Exception {
 		Map<String, List<Map<String, Object>>> allResultSet = sourceDatabaseService.loadAll();
 
-		assertThat(allResultSet).isNotEmpty()
-			.containsOnlyKeys(sourceDatabaseProperties.getTables().stream().map(SourceTable::getName).collect(toList()));
+		assertThat(allResultSet).isNotEmpty().containsOnlyKeys(
+			sourceDatabaseProperties.getTables().stream().map(SourceTable::getTargetTableName).collect(toList()));
 	}
 }

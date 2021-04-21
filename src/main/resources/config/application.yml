@@ -36,13 +36,17 @@ spring:
 
 source-database:
   tables:
-  - name: core.client
+  - targetTableName: ${target-database.tables[0].name}
+    name: core.client
     query: SELECT * FROM ${source-database.tables[0].name}
       WHERE ${source-database.tables[0].idColumnName} > %s
+      AND "json" ->> 'firstName' != '-'
+      AND "json" ->> 'lastName' != '-'
       ORDER BY ${source-database.tables[0].idColumnName} ASC
     idColumnName: id
     lastId: 0
-  - name: core.event
+  - targetTableName: ${target-database.tables[1].name}
+    name: core.event
     query: SELECT * FROM ${source-database.tables[1].name}
       WHERE ${source-database.tables[1].idColumnName} > %s
       ORDER BY ${source-database.tables[1].idColumnName} ASC
@@ -52,7 +56,23 @@ source-database:
 target-database:
   tables:
   - name: sid3.client_ibu
-    sourceTableName: ${source-database.tables[0].name}
+    columns:
+    - name: document_id
+      type: varchar(75)
+      sourceColumnType: json
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: date_created
+      type: timestamp
+      sourceColumnType: json
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: base_entity_id
+      type: varchar(75)
+      sourceColumnType: json
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+  - name: sid3.identitas_ibu
     columns:
     - name: document_id
       type: varchar(75)
