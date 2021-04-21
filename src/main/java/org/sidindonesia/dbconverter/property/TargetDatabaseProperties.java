@@ -9,5 +9,6 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "target-database")
 @Data
 public class TargetDatabaseProperties {
+	private String schemaName;
 	private Set<TargetTable> tables;
 }

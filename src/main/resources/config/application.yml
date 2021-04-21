@@ -54,38 +54,61 @@ source-database:
     lastId: 0
 
 target-database:
+  schemaName: sid3
   tables:
-  - name: sid3.client_ibu
+  - name: ${target-database.schemaName}.client_ibu
     columns:
+    - name: source_${target-database.tables[0].columns[0].sourceColumnName}
+      type: ${target-database.tables[0].columns[0].sourceColumnType}
+      sourceColumnName: id
+      sourceColumnType: bigserial
+    - name: source_${target-database.tables[0].columns[1].sourceColumnName}
+      type: ${target-database.tables[0].columns[1].sourceColumnType}
+      sourceColumnName: date_deleted
+      sourceColumnType: timestamp
+    - name: source_${target-database.tables[0].columns[2].sourceColumnName}
+      type: ${target-database.tables[0].columns[2].sourceColumnType}
+      sourceColumnName: server_version
+      sourceColumnType: int8
     - name: document_id
       type: varchar(75)
-      sourceColumnType: json
       sourceColumnName: json
+      sourceColumnType: json
       jsonPath: $._id
     - name: date_created
       type: timestamp
-      sourceColumnType: json
       sourceColumnName: json
+      sourceColumnType: json
       jsonPath: $.dateCreated
     - name: base_entity_id
       type: varchar(75)
-      sourceColumnType: json
       sourceColumnName: json
+      sourceColumnType: json
       jsonPath: $.baseEntityId
-  - name: sid3.identitas_ibu
+    query: INSERT INTO ${target-database.tables[0].name} (
+      ${target-database.tables[0].columns[0].name}, ${target-database.tables[0].columns[1].name}, 
+      ${target-database.tables[0].columns[2].name}, ${target-database.tables[0].columns[3].name}, 
+      ${target-database.tables[0].columns[4].name}, ${target-database.tables[0].columns[5].name}
+      ) VALUES (
+        :${target-database.tables[0].columns[0].name}, :${target-database.tables[0].columns[1].name},
+        :${target-database.tables[0].columns[2].name}, :${target-database.tables[0].columns[3].name},
+        :${target-database.tables[0].columns[4].name}, :${target-database.tables[0].columns[5].name}
+        )
+
+  - name: ${target-database.schemaName}.identitas_ibu
     columns:
     - name: document_id
       type: varchar(75)
-      sourceColumnType: json
       sourceColumnName: json
+      sourceColumnType: json
       jsonPath: $._id
     - name: date_created
       type: timestamp
-      sourceColumnType: json
       sourceColumnName: json
+      sourceColumnType: json
       jsonPath: $.dateCreated
     - name: base_entity_id
       type: varchar(75)
-      sourceColumnType: json
       sourceColumnName: json
+      sourceColumnType: json
       jsonPath: $.baseEntityId

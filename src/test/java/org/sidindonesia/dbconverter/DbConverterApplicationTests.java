@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@SpringBootTest
-class DbConverterApplicationTests {
+@SpringBootTest(properties = "scheduling.enabled=true")
+class DbConverterApplicationTests extends IntegrationTest {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

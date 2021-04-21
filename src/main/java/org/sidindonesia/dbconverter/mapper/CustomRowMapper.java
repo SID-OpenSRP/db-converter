@@ -1,4 +1,4 @@
-package org.sidindonesia.dbconverter.service;
+package org.sidindonesia.dbconverter.mapper;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
