@@ -24,7 +24,7 @@ spring:
   config:
     import:
     - source-database.yml
-    - destination-database.yml  
+    - destination-database.yml
   datasource:
     name: source
     jdbc-url: jdbc:postgresql://localhost:5432/opensrp
