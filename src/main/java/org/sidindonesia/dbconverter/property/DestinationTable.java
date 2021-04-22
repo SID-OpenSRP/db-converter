@@ -17,6 +17,12 @@ public class DestinationTable {
 		private Long typeLength;
 		private String sourceColumnName;
 		private String jsonPath;
-		private String constraints;
+		private boolean isUnique;
+
+		// this was needed because lombok wrongly generates `setUnique` instead of
+		// `setIsUnique`
+		public void setIsUnique(boolean isUnique) {
+			this.isUnique = isUnique;
+		}
 	}
 }

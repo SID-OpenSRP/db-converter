@@ -45,8 +45,8 @@ public class DestinationDatabaseListener implements ApplicationListener<Applicat
 					columnDefinition = columnDefinition.concat("(" + column.getTypeLength() + ")");
 				}
 
-				if (nonNull(column.getConstraints())) {
-					columnDefinition = columnDefinition.concat(" " + column.getConstraints());
+				if (column.isUnique()) {
+					columnDefinition = columnDefinition.concat(" UNIQUE");
 				}
 
 				return columnDefinition;

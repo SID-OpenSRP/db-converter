@@ -21,6 +21,7 @@ public class ConvertService {
 
 	@Scheduled(fixedRateString = "${fixedRate.in.milliseconds}")
 	public void convert() {
+		// TODO change log level to debug
 		log.info("Retrieving all required rows from Source DB...");
 		Map<String, List<Map<String, Object>>> allRequiredTables = sourceDatabaseService.loadAll();
 

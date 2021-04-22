@@ -6,7 +6,7 @@ destination-database:
     - name: source_${destination-database.tables[0].columns[0].sourceColumnName}
       typeName: bigserial
       sourceColumnName: id
-      constraints: UNIQUE # separate by space(s)
+      isUnique: true
     - name: source_${destination-database.tables[0].columns[1].sourceColumnName}
       typeName: timestamp
       sourceColumnName: date_deleted
