@@ -13,9 +13,10 @@ public class TargetTable {
 	@Data
 	public static class TargetColumn {
 		private String name;
-		private String type;
-		private String sourceColumnType;
+		private String typeName;
+		private Long typeLength;
 		private String sourceColumnName;
 		private String jsonPath;
+		private String constraints;
 	}
 }

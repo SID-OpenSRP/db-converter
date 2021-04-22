@@ -1,5 +1,6 @@
 package org.sidindonesia.dbconverter.listener;
 
+import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
@@ -37,8 +38,19 @@ public class TargetDatabaseListener implements ApplicationListener<ApplicationRe
 			String query = "CREATE TABLE IF NOT EXISTS ";
 			query = query.concat(table.getName() + " (\n");
 
-			List<String> columnDefinitions = table.getColumns().stream()
-				.map(column -> column.getName().concat(" " + column.getType())).collect(toList());
+			List<String> columnDefinitions = table.getColumns().stream().map(column -> {
+				String columnDefinition = column.getName().concat(" " + column.getTypeName());
+
+				if (nonNull(column.getTypeLength())) {
+					columnDefinition = columnDefinition.concat("(" + column.getTypeLength() + ")");
+				}
+
+				if (nonNull(column.getConstraints())) {
+					columnDefinition = columnDefinition.concat(" " + column.getConstraints());
+				}
+
+				return columnDefinition;
+			}).collect(toList());
 
 			String joinedColumnDefinitions = String.join(",\n", columnDefinitions);
 			query = query.concat(joinedColumnDefinitions);

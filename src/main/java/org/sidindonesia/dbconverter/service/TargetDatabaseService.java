@@ -1,12 +1,15 @@
 package org.sidindonesia.dbconverter.service;
 
+import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
+import java.sql.JDBCType;
 import java.util.List;
 import java.util.Map;
 
 import org.postgresql.util.PGobject;
 import org.sidindonesia.dbconverter.property.TargetDatabaseProperties;
+import org.sidindonesia.dbconverter.util.SQLTypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -34,14 +37,18 @@ public class TargetDatabaseService {
 				MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
 				targetTable.getColumns().forEach(targetColumn -> {
-					if (targetColumn.getSourceColumnType().equalsIgnoreCase("json")) {
+					if (nonNull(targetColumn.getJsonPath())) {
 						PGobject sourceColumnPGObjectValue = (PGobject) sourceRow
 							.get(targetColumn.getSourceColumnName());
 						String sourceColumnValue = sourceColumnPGObjectValue.getValue();
 
-						Object targetColumnValue = JsonPath.parse(sourceColumnValue).read(targetColumn.getJsonPath());
+						String targetColumnValue = JsonPath.parse(sourceColumnValue).read(targetColumn.getJsonPath());
 
-						parameterSource.addValue(targetColumn.getName(), targetColumnValue);
+						JDBCType jdbcType = JDBCType.valueOf(targetColumn.getTypeName().toUpperCase().replace(' ', '_')
+							.replace("TIME_ZONE", "TIMEZONE"));
+						Object convertedValue = SQLTypeUtil.convertStringToAnotherType(targetColumnValue, jdbcType);
+
+						parameterSource.addValue(targetColumn.getName(), convertedValue);
 					} else {
 						parameterSource.addValue(targetColumn.getName(),
 							sourceRow.get(targetColumn.getSourceColumnName()));

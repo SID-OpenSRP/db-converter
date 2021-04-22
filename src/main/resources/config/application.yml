@@ -59,31 +59,28 @@ target-database:
   - name: ${target-database.schemaName}.client_ibu
     columns:
     - name: source_${target-database.tables[0].columns[0].sourceColumnName}
-      type: ${target-database.tables[0].columns[0].sourceColumnType}
+      typeName: bigserial
       sourceColumnName: id
-      sourceColumnType: bigserial
+      constraints: UNIQUE # separate by space(s)
     - name: source_${target-database.tables[0].columns[1].sourceColumnName}
-      type: ${target-database.tables[0].columns[1].sourceColumnType}
+      typeName: timestamp
       sourceColumnName: date_deleted
-      sourceColumnType: timestamp
     - name: source_${target-database.tables[0].columns[2].sourceColumnName}
-      type: ${target-database.tables[0].columns[2].sourceColumnType}
+      typeName: int8
       sourceColumnName: server_version
-      sourceColumnType: int8
     - name: document_id
-      type: varchar(75)
+      typeName: varchar
+      typeLength: 75
       sourceColumnName: json
-      sourceColumnType: json
       jsonPath: $._id
     - name: date_created
-      type: timestamp
+      typeName: timestamp with time zone
       sourceColumnName: json
-      sourceColumnType: json
       jsonPath: $.dateCreated
     - name: base_entity_id
-      type: varchar(75)
+      typeName: varchar
+      typeLength: 75
       sourceColumnName: json
-      sourceColumnType: json
       jsonPath: $.baseEntityId
     query: INSERT INTO ${target-database.tables[0].name} (
       ${target-database.tables[0].columns[0].name}, ${target-database.tables[0].columns[1].name}, 
@@ -94,21 +91,21 @@ target-database:
         :${target-database.tables[0].columns[2].name}, :${target-database.tables[0].columns[3].name},
         :${target-database.tables[0].columns[4].name}, :${target-database.tables[0].columns[5].name}
         )
-
+# TODO refactor the query, make it dynamic
+# TODO rename all `target` to `destination`, case-sensitive
   - name: ${target-database.schemaName}.identitas_ibu
     columns:
     - name: document_id
-      type: varchar(75)
+      typeName: varchar
+      typeLength: 75
       sourceColumnName: json
-      sourceColumnType: json
       jsonPath: $._id
     - name: date_created
-      type: timestamp
+      typeName: timestamp with time zone
       sourceColumnName: json
-      sourceColumnType: json
       jsonPath: $.dateCreated
     - name: base_entity_id
-      type: varchar(75)
+      typeName: varchar
+      typeLength: 75
       sourceColumnName: json
-      sourceColumnType: json
       jsonPath: $.baseEntityId
