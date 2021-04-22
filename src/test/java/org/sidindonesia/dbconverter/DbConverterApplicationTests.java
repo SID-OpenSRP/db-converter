@@ -22,14 +22,14 @@ class DbConverterApplicationTests extends IntegrationTest {
 	private DataSource sourceDataSource;
 
 	@Autowired
-	@Qualifier("targetDataSource")
-	private DataSource targetDataSource;
+	@Qualifier("destinationDataSource")
+	private DataSource destinationDataSource;
 
 	@Value("${spring.datasource.username}")
 	private String sourceDataSourceUserName;
 
-	@Value("${spring.target-datasource.username}")
-	private String targetDataSourceUserName;
+	@Value("${spring.destination-datasource.username}")
+	private String destinationDataSourceUserName;
 
 	@Test
 	void contextLoads() {
@@ -42,11 +42,11 @@ class DbConverterApplicationTests extends IntegrationTest {
 		assertThat(jdbcTemplate.getDataSource().getConnection().getMetaData().getUserName())
 			.isEqualTo(sourceDataSourceUserName);
 
-		jdbcTemplate.setDataSource(targetDataSource);
+		jdbcTemplate.setDataSource(destinationDataSource);
 
-		assertThat(jdbcTemplate.getDataSource()).isEqualTo(targetDataSource);
+		assertThat(jdbcTemplate.getDataSource()).isEqualTo(destinationDataSource);
 		assertThat(jdbcTemplate.getDataSource().getConnection().getMetaData().getUserName())
-			.isEqualTo(targetDataSourceUserName);
+			.isEqualTo(destinationDataSourceUserName);
 	}
 
 }

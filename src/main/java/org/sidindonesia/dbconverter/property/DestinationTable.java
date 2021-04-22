@@ -5,13 +5,13 @@ import java.util.Set;
 import lombok.Data;
 
 @Data
-public class TargetTable {
+public class DestinationTable {
 	private String name;
-	private Set<TargetColumn> columns;
+	private Set<DestinationColumn> columns;
 	private String query;
 
 	@Data
-	public static class TargetColumn {
+	public static class DestinationColumn {
 		private String name;
 		private String typeName;
 		private Long typeLength;

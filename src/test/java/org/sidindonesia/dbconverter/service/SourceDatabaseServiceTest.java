@@ -24,6 +24,6 @@ class SourceDatabaseServiceTest extends IntegrationTest {
 		Map<String, List<Map<String, Object>>> allResultSet = sourceDatabaseService.loadAll();
 
 		assertThat(allResultSet).isNotEmpty().containsOnlyKeys(
-			sourceDatabaseProperties.getTables().stream().map(SourceTable::getTargetTableName).collect(toList()));
+			sourceDatabaseProperties.getTables().stream().map(SourceTable::getDestinationTableName).collect(toList()));
 	}
 }

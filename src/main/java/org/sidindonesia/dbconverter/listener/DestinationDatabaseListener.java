@@ -5,7 +5,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
-import org.sidindonesia.dbconverter.property.TargetDatabaseProperties;
+import org.sidindonesia.dbconverter.property.DestinationDatabaseProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -20,21 +20,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class TargetDatabaseListener implements ApplicationListener<ApplicationReadyEvent> {
+public class DestinationDatabaseListener implements ApplicationListener<ApplicationReadyEvent> {
 	@Autowired
-	@Qualifier("targetJdbcTemplate")
-	private NamedParameterJdbcTemplate targetJdbcTemplate;
+	@Qualifier("destinationJdbcTemplate")
+	private NamedParameterJdbcTemplate destinationJdbcTemplate;
 
-	private final TargetDatabaseProperties targetDatabaseProperties;
+	private final DestinationDatabaseProperties destinationDatabaseProperties;
 
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
-		log.info("Creating target DB tables if not exists...");
+		log.info("Creating destination DB tables if not exists...");
 
-		JdbcTemplate jdbcTemplate = targetJdbcTemplate.getJdbcTemplate();
-		jdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + targetDatabaseProperties.getSchemaName());
+		JdbcTemplate jdbcTemplate = destinationJdbcTemplate.getJdbcTemplate();
+		jdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + destinationDatabaseProperties.getSchemaName());
 
-		List<String> ddlQueries = targetDatabaseProperties.getTables().stream().map(table -> {
+		List<String> ddlQueries = destinationDatabaseProperties.getTables().stream().map(table -> {
 			String query = "CREATE TABLE IF NOT EXISTS ";
 			query = query.concat(table.getName() + " (\n");
 

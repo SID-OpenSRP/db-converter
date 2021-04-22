@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.postgresql.util.PGobject;
-import org.sidindonesia.dbconverter.property.TargetDatabaseProperties;
+import org.sidindonesia.dbconverter.property.DestinationDatabaseProperties;
 import org.sidindonesia.dbconverter.util.SQLTypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,36 +22,36 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class TargetDatabaseService {
+public class DestinationDatabaseService {
 	@Autowired
-	@Qualifier("targetJdbcTemplate")
-	private NamedParameterJdbcTemplate targetJdbcTemplate;
+	@Qualifier("destinationJdbcTemplate")
+	private NamedParameterJdbcTemplate destinationJdbcTemplate;
 
-	private final TargetDatabaseProperties targetDatabaseProperties;
+	private final DestinationDatabaseProperties destinationDatabaseProperties;
 
 	public List<int[]> processRowsFromSource(Map<String, List<Map<String, Object>>> allRequiredTables) {
-		return targetDatabaseProperties.getTables().stream().map(targetTable -> {
-			List<Map<String, Object>> sourceResultList = allRequiredTables.get(targetTable.getName());
+		return destinationDatabaseProperties.getTables().stream().map(destinationTable -> {
+			List<Map<String, Object>> sourceResultList = allRequiredTables.get(destinationTable.getName());
 
 			MapSqlParameterSource[] parameterSources = sourceResultList.stream().map(sourceRow -> {
 				MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
-				targetTable.getColumns().forEach(targetColumn -> {
-					if (nonNull(targetColumn.getJsonPath())) {
+				destinationTable.getColumns().forEach(destinationColumn -> {
+					if (nonNull(destinationColumn.getJsonPath())) {
 						PGobject sourceColumnPGObjectValue = (PGobject) sourceRow
-							.get(targetColumn.getSourceColumnName());
+							.get(destinationColumn.getSourceColumnName());
 						String sourceColumnValue = sourceColumnPGObjectValue.getValue();
 
-						String targetColumnValue = JsonPath.parse(sourceColumnValue).read(targetColumn.getJsonPath());
+						String destinationColumnValue = JsonPath.parse(sourceColumnValue).read(destinationColumn.getJsonPath());
 
-						JDBCType jdbcType = JDBCType.valueOf(targetColumn.getTypeName().toUpperCase().replace(' ', '_')
+						JDBCType jdbcType = JDBCType.valueOf(destinationColumn.getTypeName().toUpperCase().replace(' ', '_')
 							.replace("TIME_ZONE", "TIMEZONE"));
-						Object convertedValue = SQLTypeUtil.convertStringToAnotherType(targetColumnValue, jdbcType);
+						Object convertedValue = SQLTypeUtil.convertStringToAnotherType(destinationColumnValue, jdbcType);
 
-						parameterSource.addValue(targetColumn.getName(), convertedValue);
+						parameterSource.addValue(destinationColumn.getName(), convertedValue);
 					} else {
-						parameterSource.addValue(targetColumn.getName(),
-							sourceRow.get(targetColumn.getSourceColumnName()));
+						parameterSource.addValue(destinationColumn.getName(),
+							sourceRow.get(destinationColumn.getSourceColumnName()));
 					}
 				});
 
@@ -59,7 +59,7 @@ public class TargetDatabaseService {
 
 			}).toArray(MapSqlParameterSource[]::new);
 
-			return targetJdbcTemplate.batchUpdate(targetTable.getQuery(), parameterSources);
+			return destinationJdbcTemplate.batchUpdate(destinationTable.getQuery(), parameterSources);
 		}).collect(toList());
 	}
 }

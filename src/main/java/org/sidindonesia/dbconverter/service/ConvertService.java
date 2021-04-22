@@ -17,14 +17,14 @@ import lombok.extern.slf4j.Slf4j;
 public class ConvertService {
 
 	private final SourceDatabaseService sourceDatabaseService;
-	private final TargetDatabaseService targetDatabaseService;
+	private final DestinationDatabaseService destinationDatabaseService;
 
 	@Scheduled(fixedRateString = "${fixedRate.in.milliseconds}")
 	public void convert() {
 		log.info("Retrieving all required rows from Source DB...");
 		Map<String, List<Map<String, Object>>> allRequiredTables = sourceDatabaseService.loadAll();
 
-		log.info("Processing all required rows from Source DB to Target DB...");
-		targetDatabaseService.processRowsFromSource(allRequiredTables);
+		log.info("Processing all required rows from Source DB to Destination DB...");
+		destinationDatabaseService.processRowsFromSource(allRequiredTables);
 	}
 }

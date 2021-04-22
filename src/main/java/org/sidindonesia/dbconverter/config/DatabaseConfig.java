@@ -21,8 +21,8 @@ public class DatabaseConfig {
 	}
 
 	@Bean
-	@ConfigurationProperties(prefix = "spring.target-datasource")
-	public DataSource targetDataSource() {
+	@ConfigurationProperties(prefix = "spring.destination-datasource")
+	public DataSource destinationDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
@@ -38,7 +38,7 @@ public class DatabaseConfig {
 	}
 
 	@Bean
-	public NamedParameterJdbcTemplate targetJdbcTemplate(@Qualifier("targetDataSource") DataSource targetDataSource) {
-		return new NamedParameterJdbcTemplate(targetDataSource);
+	public NamedParameterJdbcTemplate destinationJdbcTemplate(@Qualifier("destinationDataSource") DataSource destinationDataSource) {
+		return new NamedParameterJdbcTemplate(destinationDataSource);
 	}
 }

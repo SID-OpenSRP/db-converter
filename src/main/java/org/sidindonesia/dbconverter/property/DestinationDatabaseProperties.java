@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Data;
 
-@ConfigurationProperties(prefix = "target-database")
+@ConfigurationProperties(prefix = "destination-database")
 @Data
-public class TargetDatabaseProperties {
+public class DestinationDatabaseProperties {
 	private String schemaName;
-	private Set<TargetTable> tables;
+	private Set<DestinationTable> tables;
 }

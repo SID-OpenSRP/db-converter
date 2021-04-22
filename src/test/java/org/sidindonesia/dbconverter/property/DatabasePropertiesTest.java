@@ -12,7 +12,7 @@ class DatabasePropertiesTest extends IntegrationTest {
 	private SourceDatabaseProperties sourceDatabaseProperties;
 
 	@Autowired
-	private TargetDatabaseProperties targetDatabaseProperties;
+	private DestinationDatabaseProperties destinationDatabaseProperties;
 
 	@Test
 	void testAssertThatSourceDatabaseTablesIsNotEmpty() throws Exception {
@@ -20,7 +20,7 @@ class DatabasePropertiesTest extends IntegrationTest {
 	}
 
 	@Test
-	void testAssertThatTargetDatabaseTablesIsNotEmpty() throws Exception {
-		assertThat(targetDatabaseProperties.getTables()).isNotEmpty();
+	void testAssertThatDestinationDatabaseTablesIsNotEmpty() throws Exception {
+		assertThat(destinationDatabaseProperties.getTables()).isNotEmpty();
 	}
 }

@@ -7,8 +7,8 @@ spring:
     username: opensrp_admin
     password: admin
     driver-class-name: org.postgresql.Driver
-  target-datasource:
-    name: target
+  destination-datasource:
+    name: destination
     jdbc-url: jdbc:postgresql://localhost:5432/dbconverter_test
     username: postgres
     password: postgres

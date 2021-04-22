@@ -27,8 +27,8 @@ spring:
     username: opensrp_admin
     password: admin
     driver-class-name: org.postgresql.Driver
-  target-datasource:
-    name: target
+  destination-datasource:
+    name: destination
     jdbc-url: jdbc:postgresql://localhost:5432/dbconverter
     username: postgres
     password: postgres
@@ -36,7 +36,7 @@ spring:
 
 source-database:
   tables:
-  - targetTableName: ${target-database.tables[0].name}
+  - destinationTableName: ${destination-database.tables[0].name}
     name: core.client
     query: SELECT * FROM ${source-database.tables[0].name}
       WHERE ${source-database.tables[0].idColumnName} > %s
@@ -45,7 +45,7 @@ source-database:
       ORDER BY ${source-database.tables[0].idColumnName} ASC
     idColumnName: id
     lastId: 0
-  - targetTableName: ${target-database.tables[1].name}
+  - destinationTableName: ${destination-database.tables[1].name}
     name: core.event
     query: SELECT * FROM ${source-database.tables[1].name}
       WHERE ${source-database.tables[1].idColumnName} > %s
@@ -53,19 +53,19 @@ source-database:
     idColumnName: id
     lastId: 0
 
-target-database:
+destination-database:
   schemaName: sid3
   tables:
-  - name: ${target-database.schemaName}.client_ibu
+  - name: ${destination-database.schemaName}.client_ibu
     columns:
-    - name: source_${target-database.tables[0].columns[0].sourceColumnName}
+    - name: source_${destination-database.tables[0].columns[0].sourceColumnName}
       typeName: bigserial
       sourceColumnName: id
       constraints: UNIQUE # separate by space(s)
-    - name: source_${target-database.tables[0].columns[1].sourceColumnName}
+    - name: source_${destination-database.tables[0].columns[1].sourceColumnName}
       typeName: timestamp
       sourceColumnName: date_deleted
-    - name: source_${target-database.tables[0].columns[2].sourceColumnName}
+    - name: source_${destination-database.tables[0].columns[2].sourceColumnName}
       typeName: int8
       sourceColumnName: server_version
     - name: document_id
@@ -82,18 +82,17 @@ target-database:
       typeLength: 75
       sourceColumnName: json
       jsonPath: $.baseEntityId
-    query: INSERT INTO ${target-database.tables[0].name} (
-      ${target-database.tables[0].columns[0].name}, ${target-database.tables[0].columns[1].name}, 
-      ${target-database.tables[0].columns[2].name}, ${target-database.tables[0].columns[3].name}, 
-      ${target-database.tables[0].columns[4].name}, ${target-database.tables[0].columns[5].name}
+    query: INSERT INTO ${destination-database.tables[0].name} (
+      ${destination-database.tables[0].columns[0].name}, ${destination-database.tables[0].columns[1].name}, 
+      ${destination-database.tables[0].columns[2].name}, ${destination-database.tables[0].columns[3].name}, 
+      ${destination-database.tables[0].columns[4].name}, ${destination-database.tables[0].columns[5].name}
       ) VALUES (
-        :${target-database.tables[0].columns[0].name}, :${target-database.tables[0].columns[1].name},
-        :${target-database.tables[0].columns[2].name}, :${target-database.tables[0].columns[3].name},
-        :${target-database.tables[0].columns[4].name}, :${target-database.tables[0].columns[5].name}
+        :${destination-database.tables[0].columns[0].name}, :${destination-database.tables[0].columns[1].name},
+        :${destination-database.tables[0].columns[2].name}, :${destination-database.tables[0].columns[3].name},
+        :${destination-database.tables[0].columns[4].name}, :${destination-database.tables[0].columns[5].name}
         )
 # TODO refactor the query, make it dynamic
-# TODO rename all `target` to `destination`, case-sensitive
-  - name: ${target-database.schemaName}.identitas_ibu
+  - name: ${destination-database.schemaName}.identitas_ibu
     columns:
     - name: document_id
       typeName: varchar
