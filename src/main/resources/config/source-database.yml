@@ -1,0 +1,18 @@
+source-database:
+  tables:
+  - destinationTableName: ${destination-database.tables[0].name}
+    name: core.client
+    query: SELECT * FROM ${source-database.tables[0].name}
+      WHERE ${source-database.tables[0].idColumnName} > %s
+      AND "json" ->> 'firstName' != '-'
+      AND "json" ->> 'lastName' != '-'
+      ORDER BY ${source-database.tables[0].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+  - destinationTableName: ${destination-database.tables[1].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[1].name}
+      WHERE ${source-database.tables[1].idColumnName} > %s
+      ORDER BY ${source-database.tables[1].idColumnName} ASC
+    idColumnName: id
+    lastId: 0

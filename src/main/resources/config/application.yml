@@ -21,6 +21,10 @@ fixedRate:
 spring:
   application:
     name: db-converter
+  config:
+    import:
+    - source-database.yml
+    - destination-database.yml  
   datasource:
     name: source
     jdbc-url: jdbc:postgresql://localhost:5432/opensrp
@@ -33,78 +37,3 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-
-source-database:
-  tables:
-  - destinationTableName: ${destination-database.tables[0].name}
-    name: core.client
-    query: SELECT * FROM ${source-database.tables[0].name}
-      WHERE ${source-database.tables[0].idColumnName} > %s
-      AND "json" ->> 'firstName' != '-'
-      AND "json" ->> 'lastName' != '-'
-      ORDER BY ${source-database.tables[0].idColumnName} ASC
-    idColumnName: id
-    lastId: 0
-  - destinationTableName: ${destination-database.tables[1].name}
-    name: core.event
-    query: SELECT * FROM ${source-database.tables[1].name}
-      WHERE ${source-database.tables[1].idColumnName} > %s
-      ORDER BY ${source-database.tables[1].idColumnName} ASC
-    idColumnName: id
-    lastId: 0
-
-destination-database:
-  schemaName: sid3
-  tables:
-  - name: ${destination-database.schemaName}.client_ibu
-    columns:
-    - name: source_${destination-database.tables[0].columns[0].sourceColumnName}
-      typeName: bigserial
-      sourceColumnName: id
-      constraints: UNIQUE # separate by space(s)
-    - name: source_${destination-database.tables[0].columns[1].sourceColumnName}
-      typeName: timestamp
-      sourceColumnName: date_deleted
-    - name: source_${destination-database.tables[0].columns[2].sourceColumnName}
-      typeName: int8
-      sourceColumnName: server_version
-    - name: document_id
-      typeName: varchar
-      typeLength: 75
-      sourceColumnName: json
-      jsonPath: $._id
-    - name: date_created
-      typeName: timestamp with time zone
-      sourceColumnName: json
-      jsonPath: $.dateCreated
-    - name: base_entity_id
-      typeName: varchar
-      typeLength: 75
-      sourceColumnName: json
-      jsonPath: $.baseEntityId
-    query: INSERT INTO ${destination-database.tables[0].name} (
-      ${destination-database.tables[0].columns[0].name}, ${destination-database.tables[0].columns[1].name}, 
-      ${destination-database.tables[0].columns[2].name}, ${destination-database.tables[0].columns[3].name}, 
-      ${destination-database.tables[0].columns[4].name}, ${destination-database.tables[0].columns[5].name}
-      ) VALUES (
-        :${destination-database.tables[0].columns[0].name}, :${destination-database.tables[0].columns[1].name},
-        :${destination-database.tables[0].columns[2].name}, :${destination-database.tables[0].columns[3].name},
-        :${destination-database.tables[0].columns[4].name}, :${destination-database.tables[0].columns[5].name}
-        )
-# TODO refactor the query, make it dynamic
-  - name: ${destination-database.schemaName}.identitas_ibu
-    columns:
-    - name: document_id
-      typeName: varchar
-      typeLength: 75
-      sourceColumnName: json
-      jsonPath: $._id
-    - name: date_created
-      typeName: timestamp with time zone
-      sourceColumnName: json
-      jsonPath: $.dateCreated
-    - name: base_entity_id
-      typeName: varchar
-      typeLength: 75
-      sourceColumnName: json
-      jsonPath: $.baseEntityId
