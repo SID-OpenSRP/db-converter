@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @Configuration
@@ -38,7 +39,21 @@ public class DatabaseConfig {
 	}
 
 	@Bean
-	public NamedParameterJdbcTemplate destinationJdbcTemplate(@Qualifier("destinationDataSource") DataSource destinationDataSource) {
+	public NamedParameterJdbcTemplate destinationJdbcTemplate(
+		@Qualifier("destinationDataSource") DataSource destinationDataSource) {
 		return new NamedParameterJdbcTemplate(destinationDataSource);
+	}
+
+	@Primary
+	@Bean
+	public JdbcOperations sourceClassicJdbcTemplate(
+		@Qualifier("sourceJdbcTemplate") NamedParameterJdbcTemplate sourceJdbcTemplate) {
+		return sourceJdbcTemplate.getJdbcOperations();
+	}
+
+	@Bean
+	public JdbcOperations destinationClassicJdbcTemplate(
+		@Qualifier("destinationJdbcTemplate") NamedParameterJdbcTemplate destinationJdbcTemplate) {
+		return destinationJdbcTemplate.getJdbcOperations();
 	}
 }

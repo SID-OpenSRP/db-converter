@@ -27,16 +27,6 @@ destination-database:
       typeLength: 75
       sourceColumnName: json
       jsonPath: $.baseEntityId
-    query: INSERT INTO ${destination-database.tables[0].name} (
-      ${destination-database.tables[0].columns[0].name}, ${destination-database.tables[0].columns[1].name}, 
-      ${destination-database.tables[0].columns[2].name}, ${destination-database.tables[0].columns[3].name}, 
-      ${destination-database.tables[0].columns[4].name}, ${destination-database.tables[0].columns[5].name}
-      ) VALUES (
-        :${destination-database.tables[0].columns[0].name}, :${destination-database.tables[0].columns[1].name},
-        :${destination-database.tables[0].columns[2].name}, :${destination-database.tables[0].columns[3].name},
-        :${destination-database.tables[0].columns[4].name}, :${destination-database.tables[0].columns[5].name}
-        )
-# TODO refactor the query, make it dynamic
   - name: ${destination-database.schemaName}.identitas_ibu
     columns:
     - name: document_id

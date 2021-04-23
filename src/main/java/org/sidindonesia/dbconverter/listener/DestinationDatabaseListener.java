@@ -62,5 +62,7 @@ public class DestinationDatabaseListener implements ApplicationListener<Applicat
 		batchQuery = batchQuery.concat(";");
 
 		jdbcTemplate.execute(batchQuery);
+
+		log.info("Destination DB migration completed.");
 	}
 }

@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.sql.DataSource;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,10 @@ class DbConverterApplicationTests extends IntegrationTest {
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
+	@Qualifier("destinationClassicJdbcTemplate")
+	private JdbcTemplate destinationClassicJdbcTemplate;
+
+	@Autowired
 	private DataSource sourceDataSource;
 
 	@Autowired
@@ -31,11 +36,23 @@ class DbConverterApplicationTests extends IntegrationTest {
 	@Value("${spring.destination-datasource.username}")
 	private String destinationDataSourceUserName;
 
+	@Value("${destination-database.schemaName}")
+	private String destinationDatabaseSchemaName;
+
+	@BeforeEach
+	void setUp() {
+		destinationClassicJdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + destinationDatabaseSchemaName);
+	}
+
+	@AfterEach
+	void tearDown() {
+		destinationClassicJdbcTemplate.execute("DROP SCHEMA IF EXISTS " + destinationDatabaseSchemaName + " CASCADE");
+	}
+
 	@Test
 	void contextLoads() {
 	}
 
-	@Disabled("Affects other integration tests")
 	@Test
 	void testChangeDataSource_assertThatSourceDataSourceIsPrimary() throws Exception {
 		assertThat(jdbcTemplate.getDataSource()).isEqualTo(sourceDataSource);

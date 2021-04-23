@@ -42,11 +42,13 @@ public class DestinationDatabaseService {
 							.get(destinationColumn.getSourceColumnName());
 						String sourceColumnValue = sourceColumnPGObjectValue.getValue();
 
-						String destinationColumnValue = JsonPath.parse(sourceColumnValue).read(destinationColumn.getJsonPath());
+						String destinationColumnValue = JsonPath.parse(sourceColumnValue)
+							.read(destinationColumn.getJsonPath());
 
-						JDBCType jdbcType = JDBCType.valueOf(destinationColumn.getTypeName().toUpperCase().replace(' ', '_')
-							.replace("TIME_ZONE", "TIMEZONE"));
-						Object convertedValue = SQLTypeUtil.convertStringToAnotherType(destinationColumnValue, jdbcType);
+						JDBCType jdbcType = JDBCType.valueOf(destinationColumn.getTypeName().toUpperCase()
+							.replace(' ', '_').replace("TIME_ZONE", "TIMEZONE"));
+						Object convertedValue = SQLTypeUtil.convertStringToAnotherType(destinationColumnValue,
+							jdbcType);
 
 						parameterSource.addValue(destinationColumn.getName(), convertedValue);
 					} else {
@@ -59,7 +61,17 @@ public class DestinationDatabaseService {
 
 			}).toArray(MapSqlParameterSource[]::new);
 
-			return destinationJdbcTemplate.batchUpdate(destinationTable.getQuery(), parameterSources);
+			String query = "INSERT INTO " + destinationTable.getName() + " (\n";
+			List<String> columnNames = destinationTable.getColumns().stream().map(destinationColumn -> {
+				return destinationColumn.getName();
+			}).collect(toList());
+			query = query + String.join(", ", columnNames) + "\n) VALUES (\n";
+
+			List<String> prependedColumnNames = columnNames.stream().map(columnName -> ":" + columnName)
+				.collect(toList());
+			query = query + String.join(", ", prependedColumnNames) + "\n)";
+
+			return destinationJdbcTemplate.batchUpdate(query, parameterSources);
 		}).collect(toList());
 	}
 }
