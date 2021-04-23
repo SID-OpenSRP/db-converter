@@ -27,6 +27,58 @@ destination-database:
       typeLength: 75
       sourceColumnName: json
       jsonPath: $.baseEntityId
+    - name: full_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.firstName
+    - name: husband_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.lastName
+    - name: province
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.addresses[0].stateProvince
+    - name: district
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.addresses[0].countyDistrict
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.addresses[0].cityVillage
+    - name: address
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.addresses[0].addressFields.address3
+    - name: birth_date
+      typeName: date
+      sourceColumnName: json
+      jsonPath: $.birthdate
+    - name: nik
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.attributes.nik
+    - name: mother_registration_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.attributes.NoIbu
+    - name: anc_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.attributes.anc_id
+    - name: midwife_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.attributes.NamaDukun
+    - name: cadre_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.attributes.NamaKader
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
   - name: ${destination-database.schemaName}.identitas_ibu
     columns:
     - name: document_id

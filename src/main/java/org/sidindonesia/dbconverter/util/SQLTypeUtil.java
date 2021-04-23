@@ -92,71 +92,73 @@ public final class SQLTypeUtil {
 		return result;
 	}
 
-	private static Object convertStringToAnotherType(String string, int type) {
+	private static Object convertToAnotherType(Object object, int type) {
 		Object convertedObject;
+
+		String stringValue = String.valueOf(object);
 
 		switch (type) {
 		case Types.CHAR:
 		case Types.VARCHAR:
 		case Types.LONGVARCHAR:
-			convertedObject = string;
+			convertedObject = stringValue;
 			break;
 
 		case Types.NUMERIC:
 		case Types.DECIMAL:
-			convertedObject = new BigDecimal(string);
+			convertedObject = new BigDecimal(stringValue);
 			break;
 
 		case Types.BIT:
-			convertedObject = Boolean.valueOf(string);
+			convertedObject = Boolean.valueOf(stringValue);
 			break;
 
 		case Types.TINYINT:
-			convertedObject = Byte.valueOf(string);
+			convertedObject = Byte.valueOf(stringValue);
 			break;
 
 		case Types.SMALLINT:
-			convertedObject = Short.valueOf(string);
+			convertedObject = Short.valueOf(stringValue);
 			break;
 
 		case Types.INTEGER:
-			convertedObject = Integer.valueOf(string);
+			convertedObject = Integer.valueOf(stringValue);
 			break;
 
 		case Types.BIGINT:
-			convertedObject = Long.valueOf(string);
+			convertedObject = Long.valueOf(stringValue);
 			break;
 
 		case Types.REAL:
 		case Types.FLOAT:
-			convertedObject = Float.valueOf(string);
+			convertedObject = Float.valueOf(stringValue);
 			break;
 
 		case Types.DOUBLE:
-			convertedObject = Double.valueOf(string);
+			convertedObject = Double.valueOf(stringValue);
 			break;
 
 		case Types.BINARY:
 		case Types.VARBINARY:
 		case Types.LONGVARBINARY:
 			// TODO unimplemented
-			convertedObject = string;
+			convertedObject = object;
 			break;
 
 		case Types.DATE:
-			convertedObject = java.sql.Date.valueOf(string);
+			convertedObject = java.time.LocalDate.from(ISO_DATE_TIME.parse(stringValue));
 			break;
 
 		case Types.TIME:
-			convertedObject = java.sql.Time.valueOf(string);
+			convertedObject = java.sql.Time.valueOf(stringValue);
 			break;
 
 		case Types.TIMESTAMP_WITH_TIMEZONE:
-			convertedObject = OffsetDateTime.from(ISO_DATE_TIME.parse(string));
+			convertedObject = OffsetDateTime.from(ISO_DATE_TIME.parse(stringValue));
 			break;
 
 		case Types.TIMESTAMP:
-			convertedObject = LocalDateTime.from(ISO_DATE_TIME.parse(string));
+			convertedObject = LocalDateTime.from(ISO_DATE_TIME.parse(stringValue));
 			break;
 
 		default:
@@ -166,7 +168,7 @@ public final class SQLTypeUtil {
 		return convertedObject;
 	}
 
-	public static Object convertStringToAnotherType(String string, JDBCType jdbcType) {
-		return convertStringToAnotherType(string, jdbcType.getVendorTypeNumber());
+	public static Object convertToAnotherType(Object string, JDBCType jdbcType) {
+		return convertToAnotherType(string, jdbcType.getVendorTypeNumber());
 	}
 }

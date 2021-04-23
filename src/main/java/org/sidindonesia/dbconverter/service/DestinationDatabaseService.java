@@ -42,12 +42,12 @@ public class DestinationDatabaseService {
 							.get(destinationColumn.getSourceColumnName());
 						String sourceColumnValue = sourceColumnPGObjectValue.getValue();
 
-						String destinationColumnValue = JsonPath.parse(sourceColumnValue)
+						Object destinationColumnValue = JsonPath.parse(sourceColumnValue)
 							.read(destinationColumn.getJsonPath());
 
 						JDBCType jdbcType = JDBCType.valueOf(destinationColumn.getTypeName().toUpperCase()
 							.replace(' ', '_').replace("TIME_ZONE", "TIMEZONE"));
-						Object convertedValue = SQLTypeUtil.convertStringToAnotherType(destinationColumnValue,
+						Object convertedValue = SQLTypeUtil.convertToAnotherType(destinationColumnValue,
 							jdbcType);
 
 						parameterSource.addValue(destinationColumn.getName(), convertedValue);

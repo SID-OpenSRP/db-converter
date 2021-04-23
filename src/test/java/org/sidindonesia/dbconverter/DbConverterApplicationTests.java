@@ -41,12 +41,12 @@ class DbConverterApplicationTests extends IntegrationTest {
 
 	@BeforeEach
 	void setUp() {
+		destinationClassicJdbcTemplate.execute("DROP SCHEMA IF EXISTS " + destinationDatabaseSchemaName + " CASCADE");
 		destinationClassicJdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + destinationDatabaseSchemaName);
 	}
 
 	@AfterEach
 	void tearDown() {
-		destinationClassicJdbcTemplate.execute("DROP SCHEMA IF EXISTS " + destinationDatabaseSchemaName + " CASCADE");
 	}
 
 	@Test
