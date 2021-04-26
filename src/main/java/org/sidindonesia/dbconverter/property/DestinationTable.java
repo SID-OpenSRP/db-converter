@@ -16,6 +16,7 @@ public class DestinationTable {
 		private String typeName;
 		private Long typeLength;
 		private String sourceColumnName;
+		private String jsonFilter;
 		private String jsonPath;
 		private boolean isUnique;
 

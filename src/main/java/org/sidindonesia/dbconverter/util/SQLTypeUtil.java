@@ -1,5 +1,6 @@
 package org.sidindonesia.dbconverter.util;
 
+import static java.time.format.DateTimeFormatter.ISO_DATE;
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 
 import java.math.BigDecimal;
@@ -146,7 +147,7 @@ public final class SQLTypeUtil {
 			break;
 
 		case Types.DATE:
-			convertedObject = java.time.LocalDate.from(ISO_DATE_TIME.parse(stringValue));
+			convertedObject = java.time.LocalDate.from(ISO_DATE.parse(stringValue));
 			break;
 
 		case Types.TIME:
@@ -168,7 +169,7 @@ public final class SQLTypeUtil {
 		return convertedObject;
 	}
 
-	public static Object convertToAnotherType(Object string, JDBCType jdbcType) {
-		return convertToAnotherType(string, jdbcType.getVendorTypeNumber());
+	public static Object convertToAnotherType(Object object, JDBCType jdbcType) {
+		return convertToAnotherType(object, jdbcType.getVendorTypeNumber());
 	}
 }

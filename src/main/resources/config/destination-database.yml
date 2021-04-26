@@ -10,12 +10,8 @@ destination-database:
     - name: source_${destination-database.tables[0].columns[1].sourceColumnName}
       typeName: timestamp
       sourceColumnName: date_deleted
-    - name: source_${destination-database.tables[0].columns[2].sourceColumnName}
-      typeName: int8
-      sourceColumnName: server_version
     - name: document_id
       typeName: varchar
-      typeLength: 75
       sourceColumnName: json
       jsonPath: $._id
     - name: date_created
@@ -24,7 +20,6 @@ destination-database:
       jsonPath: $.dateCreated
     - name: base_entity_id
       typeName: varchar
-      typeLength: 75
       sourceColumnName: json
       jsonPath: $.baseEntityId
     - name: full_name
@@ -52,7 +47,7 @@ destination-database:
       sourceColumnName: json
       jsonPath: $.addresses[0].addressFields.address3
     - name: birth_date
-      typeName: date
+      typeName: timestamp with time zone
       sourceColumnName: json
       jsonPath: $.birthdate
     - name: nik
@@ -88,12 +83,8 @@ destination-database:
     - name: source_${destination-database.tables[1].columns[1].sourceColumnName}
       typeName: timestamp
       sourceColumnName: date_deleted
-    - name: source_${destination-database.tables[1].columns[2].sourceColumnName}
-      typeName: int8
-      sourceColumnName: server_version
     - name: document_id
       typeName: varchar
-      typeLength: 75
       sourceColumnName: json
       jsonPath: $._id
     - name: date_created
@@ -102,7 +93,6 @@ destination-database:
       jsonPath: $.dateCreated
     - name: base_entity_id
       typeName: varchar
-      typeLength: 75
       sourceColumnName: json
       jsonPath: $.baseEntityId
     - name: full_name
@@ -110,7 +100,7 @@ destination-database:
       sourceColumnName: json
       jsonPath: $.firstName
     - name: birth_date
-      typeName: date
+      typeName: timestamp with time zone
       sourceColumnName: json
       jsonPath: $.birthdate
     - name: server_version_epoch
@@ -135,17 +125,49 @@ destination-database:
       jsonPath: $.dateEdited
   - name: ${destination-database.schemaName}.identitas_ibu
     columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
     - name: document_id
       typeName: varchar
-      typeLength: 75
       sourceColumnName: json
       jsonPath: $._id
+    - name: mother_base_entity_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.locationId
     - name: date_created
       typeName: timestamp with time zone
       sourceColumnName: json
       jsonPath: $.dateCreated
-    - name: base_entity_id
-      typeName: varchar
-      typeLength: 75
+    - name: event_date
+      typeName: timestamp with time zone
       sourceColumnName: json
-      jsonPath: $.baseEntityId
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: registration_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'registrationDate')].values[0]
+      jsonPath: $[0]
+    - name: mobile_phone_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'NomorTelponHp')].values[0]
+      jsonPath: $[0]

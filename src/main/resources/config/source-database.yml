@@ -22,6 +22,7 @@ source-database:
     name: core.event
     query: SELECT * FROM ${source-database.tables[2].name}
       WHERE ${source-database.tables[2].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Identitas Ibu'
       ORDER BY ${source-database.tables[2].idColumnName} ASC
     idColumnName: id
     lastId: 0
