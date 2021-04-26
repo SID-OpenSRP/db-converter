@@ -171,3 +171,13 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'NomorTelponHp')].values[0]
       jsonPath: $[0]
+    - name: checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksa')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: other_checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksaOther')].values[0]
+      jsonPath: $[0]

@@ -24,28 +24,30 @@ public final class DestinationColumnUtil {
 			PGobject sourceColumnValueAsPGobject = (PGobject) sourceColumnValue;
 			String pgObjectValue = sourceColumnValueAsPGobject.getValue();
 
-			Object filteredValues = null;
-			Object jsonPathValue;
-
-			if (nonNull(destinationColumn.getJsonFilter())) {
-				filteredValues = JsonPath.parse(pgObjectValue, CONFIG).read(destinationColumn.getJsonFilter());
-			}
-
-			if (nonNull(filteredValues)) {
-				jsonPathValue = JsonPath.parse(filteredValues, CONFIG).read(destinationColumn.getJsonPath());
-			} else {
-				jsonPathValue = JsonPath.parse(pgObjectValue, CONFIG).read(destinationColumn.getJsonPath());
-			}
-
-			if (nonNull(jsonPathValue)) {
-				JDBCType jdbcType = JDBCType.valueOf(
-					destinationColumn.getTypeName().toUpperCase().replace(' ', '_').replace("TIME_ZONE", "TIMEZONE"));
-				return SQLTypeUtil.convertToAnotherType(jsonPathValue, jdbcType);
-			} else {
-				return jsonPathValue;
-			}
+			return jsonPathEvaluation(destinationColumn, pgObjectValue);
 		} else {
 			return sourceColumnValue;
+		}
+	}
+
+	private static Object jsonPathEvaluation(DestinationColumn destinationColumn, String pgObjectValue) {
+		Object jsonPathEvaluation = applyFilter(destinationColumn, pgObjectValue);
+
+		if (nonNull(jsonPathEvaluation)) {
+			JDBCType jdbcType = JDBCType.valueOf(
+				destinationColumn.getTypeName().toUpperCase().replace(' ', '_').replace("TIME_ZONE", "TIMEZONE"));
+			return SQLTypeUtil.convertToAnotherType(jsonPathEvaluation, jdbcType);
+		} else {
+			return jsonPathEvaluation;
+		}
+	}
+
+	private static Object applyFilter(DestinationColumn destinationColumn, String pgObjectValue) {
+		if (nonNull(destinationColumn.getJsonFilter())) {
+			Object filteredValues = JsonPath.parse(pgObjectValue, CONFIG).read(destinationColumn.getJsonFilter());
+			return JsonPath.parse(filteredValues, CONFIG).read(destinationColumn.getJsonPath());
+		} else {
+			return JsonPath.parse(pgObjectValue, CONFIG).read(destinationColumn.getJsonPath());
 		}
 	}
 }
