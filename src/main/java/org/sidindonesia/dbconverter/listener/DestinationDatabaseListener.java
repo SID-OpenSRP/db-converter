@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -22,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class DestinationDatabaseListener implements ApplicationListener<ApplicationReadyEvent> {
 	@Autowired
-	@Qualifier("destinationJdbcTemplate")
-	private NamedParameterJdbcTemplate destinationJdbcTemplate;
+	@Qualifier("destinationJdbcOperations")
+	private JdbcOperations jdbcOperations;
 
 	private final DestinationDatabaseProperties destinationDatabaseProperties;
 
@@ -31,8 +30,7 @@ public class DestinationDatabaseListener implements ApplicationListener<Applicat
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		log.info("Creating destination DB tables if not exists...");
 
-		JdbcTemplate jdbcTemplate = destinationJdbcTemplate.getJdbcTemplate();
-		jdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + destinationDatabaseProperties.getSchemaName());
+		jdbcOperations.execute("CREATE SCHEMA IF NOT EXISTS " + destinationDatabaseProperties.getSchemaName());
 
 		List<String> ddlQueries = destinationDatabaseProperties.getTables().stream().map(table -> {
 			String query = "CREATE TABLE IF NOT EXISTS ";
@@ -61,7 +59,7 @@ public class DestinationDatabaseListener implements ApplicationListener<Applicat
 		String batchQuery = String.join(";\n\n", ddlQueries);
 		batchQuery = batchQuery.concat(";");
 
-		jdbcTemplate.execute(batchQuery);
+		jdbcOperations.execute(batchQuery);
 
 		log.info("Destination DB migration completed.");
 	}

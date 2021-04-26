@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.postgresql.util.PGobject;
 import org.sidindonesia.dbconverter.property.DestinationDatabaseProperties;
+import org.sidindonesia.dbconverter.property.DestinationTable.DestinationColumn;
 import org.sidindonesia.dbconverter.util.SQLTypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,13 +17,18 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.Option;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class DestinationDatabaseService {
+	private static final Configuration CONFIG = Configuration.builder()
+		.options(Option.DEFAULT_PATH_LEAF_TO_NULL, Option.SUPPRESS_EXCEPTIONS).build();
+
 	@Autowired
 	@Qualifier("destinationJdbcTemplate")
 	private NamedParameterJdbcTemplate destinationJdbcTemplate;
@@ -42,15 +48,18 @@ public class DestinationDatabaseService {
 							.get(destinationColumn.getSourceColumnName());
 						String sourceColumnValue = sourceColumnPGObjectValue.getValue();
 
-						Object destinationColumnValue = JsonPath.parse(sourceColumnValue)
+						Object destinationColumnValue = JsonPath.parse(sourceColumnValue, CONFIG)
 							.read(destinationColumn.getJsonPath());
 
-						JDBCType jdbcType = JDBCType.valueOf(destinationColumn.getTypeName().toUpperCase()
-							.replace(' ', '_').replace("TIME_ZONE", "TIMEZONE"));
-						Object convertedValue = SQLTypeUtil.convertToAnotherType(destinationColumnValue,
-							jdbcType);
+						if (nonNull(destinationColumnValue)) {
+							JDBCType jdbcType = JDBCType.valueOf(destinationColumn.getTypeName().toUpperCase()
+								.replace(' ', '_').replace("TIME_ZONE", "TIMEZONE"));
+							Object convertedValue = SQLTypeUtil.convertToAnotherType(destinationColumnValue, jdbcType);
+							parameterSource.addValue(destinationColumn.getName(), convertedValue);
+						} else {
+							parameterSource.addValue(destinationColumn.getName(), destinationColumnValue);
+						}
 
-						parameterSource.addValue(destinationColumn.getName(), convertedValue);
 					} else {
 						parameterSource.addValue(destinationColumn.getName(),
 							sourceRow.get(destinationColumn.getSourceColumnName()));
@@ -62,9 +71,8 @@ public class DestinationDatabaseService {
 			}).toArray(MapSqlParameterSource[]::new);
 
 			String query = "INSERT INTO " + destinationTable.getName() + " (\n";
-			List<String> columnNames = destinationTable.getColumns().stream().map(destinationColumn -> {
-				return destinationColumn.getName();
-			}).collect(toList());
+			List<String> columnNames = destinationTable.getColumns().stream().map(DestinationColumn::getName)
+				.collect(toList());
 			query = query + String.join(", ", columnNames) + "\n) VALUES (\n";
 
 			List<String> prependedColumnNames = columnNames.stream().map(columnName -> ":" + columnName)

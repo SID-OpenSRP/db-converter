@@ -67,11 +67,11 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonPath: $.attributes.anc_id
-    - name: midwife_name
+    - name: traditional_birth_attendant
       typeName: varchar
       sourceColumnName: json
       jsonPath: $.attributes.NamaDukun
-    - name: cadre_name
+    - name: community_health_worker_name
       typeName: varchar
       sourceColumnName: json
       jsonPath: $.attributes.NamaKader
@@ -79,6 +79,60 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonPath: $.serverVersion
+  - name: ${destination-database.schemaName}.client_anak
+    columns:
+    - name: source_${destination-database.tables[1].columns[0].sourceColumnName}
+      typeName: bigserial
+      sourceColumnName: id
+      isUnique: true
+    - name: source_${destination-database.tables[1].columns[1].sourceColumnName}
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: source_${destination-database.tables[1].columns[2].sourceColumnName}
+      typeName: int8
+      sourceColumnName: server_version
+    - name: document_id
+      typeName: varchar
+      typeLength: 75
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: base_entity_id
+      typeName: varchar
+      typeLength: 75
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: full_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.firstName
+    - name: birth_date
+      typeName: date
+      sourceColumnName: json
+      jsonPath: $.birthdate
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: mother_base_entity_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.relationships.ibuCaseId[0]
+    - name: openmrs_uuid
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.relationships.ibuCaseId[0]
+    - name: gender
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.gender
+    - name: date_edited
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateEdited
   - name: ${destination-database.schemaName}.identitas_ibu
     columns:
     - name: document_id

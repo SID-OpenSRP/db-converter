@@ -46,13 +46,13 @@ public class DatabaseConfig {
 
 	@Primary
 	@Bean
-	public JdbcOperations sourceClassicJdbcTemplate(
+	public JdbcOperations sourceJdbcOperations(
 		@Qualifier("sourceJdbcTemplate") NamedParameterJdbcTemplate sourceJdbcTemplate) {
 		return sourceJdbcTemplate.getJdbcOperations();
 	}
 
 	@Bean
-	public JdbcOperations destinationClassicJdbcTemplate(
+	public JdbcOperations destinationJdbcOperations(
 		@Qualifier("destinationJdbcTemplate") NamedParameterJdbcTemplate destinationJdbcTemplate) {
 		return destinationJdbcTemplate.getJdbcOperations();
 	}
