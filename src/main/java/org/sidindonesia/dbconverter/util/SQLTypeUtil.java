@@ -1,6 +1,5 @@
 package org.sidindonesia.dbconverter.util;
 
-import static java.time.format.DateTimeFormatter.ISO_DATE;
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 
 import java.math.BigDecimal;
@@ -8,12 +7,15 @@ import java.sql.JDBCType;
 import java.sql.Types;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SQLTypeUtil {
+	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("y-M-d");
+
 	/**
 	 * Translates a data type from an integer (java.sql.Types value) to a string
 	 * that represents the corresponding class.
@@ -147,7 +149,7 @@ public final class SQLTypeUtil {
 			break;
 
 		case Types.DATE:
-			convertedObject = java.time.LocalDate.from(ISO_DATE.parse(stringValue));
+			convertedObject = java.time.LocalDate.parse(stringValue, DATE_FORMATTER);
 			break;
 
 		case Types.TIME:
@@ -163,7 +165,7 @@ public final class SQLTypeUtil {
 			break;
 
 		default:
-			convertedObject = Object.class;
+			convertedObject = object;
 		}
 
 		return convertedObject;
