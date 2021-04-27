@@ -21,8 +21,7 @@ public final class DestinationColumnUtil {
 
 	public static Object mapValue(DestinationColumn destinationColumn, Object sourceColumnValue) {
 		if (nonNull(destinationColumn.getJsonPath()) && nonNull(sourceColumnValue)) {
-			PGobject sourceColumnValueAsPGobject = (PGobject) sourceColumnValue;
-			String pgObjectValue = sourceColumnValueAsPGobject.getValue();
+			String pgObjectValue = ((PGobject) sourceColumnValue).getValue();
 
 			return jsonPathEvaluation(destinationColumn, pgObjectValue);
 		} else {

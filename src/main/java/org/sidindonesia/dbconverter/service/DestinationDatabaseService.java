@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.sidindonesia.dbconverter.property.DestinationDatabaseProperties;
+import org.sidindonesia.dbconverter.property.DestinationTable;
 import org.sidindonesia.dbconverter.property.DestinationTable.DestinationColumn;
 import org.sidindonesia.dbconverter.util.DestinationColumnUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,19 +43,22 @@ public class DestinationDatabaseService {
 				});
 
 				return parameterSource;
-
 			}).toArray(MapSqlParameterSource[]::new);
 
-			String query = "INSERT INTO " + destinationTable.getName() + " (\n";
-			List<String> columnNames = destinationTable.getColumns().stream().map(DestinationColumn::getName)
-				.collect(toList());
-			query = query + String.join(", ", columnNames) + "\n) VALUES (\n";
+			String insertQuery = createInsertQueryFor(destinationTable);
 
-			List<String> prependedColumnNames = columnNames.stream().map(columnName -> ":" + columnName)
-				.collect(toList());
-			query = query + String.join(", ", prependedColumnNames) + "\n)";
-
-			return destinationJdbcTemplate.batchUpdate(query, parameterSources);
+			return destinationJdbcTemplate.batchUpdate(insertQuery, parameterSources);
 		}).collect(toList());
+	}
+
+	private String createInsertQueryFor(DestinationTable destinationTable) {
+		String query = "INSERT INTO " + destinationTable.getName() + " (\n";
+		List<String> columnNames = destinationTable.getColumns().stream().map(DestinationColumn::getName)
+			.collect(toList());
+		query = query + String.join(", ", columnNames) + "\n) VALUES (\n";
+
+		List<String> prependedColumnNames = columnNames.stream().map(columnName -> ":" + columnName).collect(toList());
+		query = query + String.join(", ", prependedColumnNames) + "\n)";
+		return query;
 	}
 }

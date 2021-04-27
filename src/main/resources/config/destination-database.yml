@@ -12,6 +12,7 @@ destination-database:
       sourceColumnName: date_deleted
     - name: document_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $._id
     - name: date_created
@@ -20,6 +21,7 @@ destination-database:
       jsonPath: $.dateCreated
     - name: base_entity_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $.baseEntityId
     - name: full_name
@@ -46,6 +48,10 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonPath: $.addresses[0].addressFields.address3
+    - name: gps
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.addresses[0].addressFields.gps
     - name: birth_date
       typeName: timestamp with time zone
       sourceColumnName: json
@@ -85,6 +91,7 @@ destination-database:
       sourceColumnName: date_deleted
     - name: document_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $._id
     - name: date_created
@@ -93,6 +100,7 @@ destination-database:
       jsonPath: $.dateCreated
     - name: base_entity_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $.baseEntityId
     - name: full_name
@@ -109,10 +117,12 @@ destination-database:
       jsonPath: $.serverVersion
     - name: mother_base_entity_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $.relationships.ibuCaseId[0]
     - name: openmrs_uuid
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $.relationships.ibuCaseId[0]
     - name: gender
@@ -129,16 +139,22 @@ destination-database:
       typeName: varchar
       sourceColumnName: id
       isUnique: true
+    - name: source_${destination-database.tables[2].columns[1].sourceColumnName}
+      typeName: timestamp
+      sourceColumnName: date_deleted
     - name: document_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $._id
     - name: mother_base_entity_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $.baseEntityId
     - name: location_id
       typeName: varchar
+      typeLength: 36
       sourceColumnName: json
       jsonPath: $.locationId
     - name: date_created
@@ -180,4 +196,84 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksaOther')].values[0]
+      jsonPath: $[0]
+    - name: patient_territory
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pasienWilayah')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: education
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pendidikan')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: integrated_healthcare_center
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'posyandu')].values[0]
+      jsonPath: $[0]
+    - name: blood_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'golonganDarah')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: life_insurance
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'asuransiJiwa')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: contraception_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'jenisKontrasepsi')].values[0]
+      jsonPath: $[0]
+    - name: is_transferred_patient
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pasienPindahan')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: public_health_center
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'puskesmas')].values[0]
+      jsonPath: $[0]
+    - name: is_poor_family
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gakinTidak')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: profession
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pekerjaan')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'Village')].values[0]
+      jsonPath: $[0]
+    - name: province
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'Province')].values[0]
+      jsonPath: $[0]
+    - name: district
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'District')].values[0]
+      jsonPath: $[0]
+    - name: age
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'umur')].values[0]
+      jsonPath: $[0]
+    - name: transfer_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tglPindah')].values[0]
+      jsonPath: $[0]
+    - name: religion
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'agama')].humanReadableValues[0]
       jsonPath: $[0]
