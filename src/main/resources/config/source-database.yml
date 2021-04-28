@@ -34,3 +34,11 @@ source-database:
       ORDER BY ${source-database.tables[3].idColumnName} ASC
     idColumnName: id
     lastId: 0
+  - destinationTableName: ${destination-database.tables[4].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[4].name}
+      WHERE ${source-database.tables[4].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Kunjungan ANC'
+      ORDER BY ${source-database.tables[4].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
