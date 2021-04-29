@@ -427,7 +427,7 @@ destination-database:
     - name: chronic_disease
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'penyakitKronis')].humanReadableValues[0]
+      jsonFilter: $.obs[?(@.formSubmissionField == 'penyakitKronis')].humanReadableValues
       jsonPath: $[0]
     - name: high_risk_pregnancy_abortus
       typeName: varchar
@@ -771,7 +771,7 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'pelayananInjeksitt')].humanReadableValues[0]
       jsonPath: $[0]
-    - name: is_recorded_in_maternal_and_child_book
+    - name: is_recorded_in_maternal_and_child_health_book
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'pelayananCatatDiBukuKia')].humanReadableValues[0]
@@ -1094,4 +1094,105 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'pendonor')].humanReadableValues
+      jsonPath: $[0]
+
+  # Legacy table name = 'dokumentasi_persalinan'
+  - name: ${destination-database.schemaName}.pnc_register
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: mother_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: high_risk_post_partum_pre_eclampsia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumPreEclampsiaEclampsia')].values[0]
+      jsonPath: $[0]
+    - name: is_child_alive
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'keadaanBayi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: second_stage_labor_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tanggalKalaII')].values[0]
+      jsonPath: $[0]
+    - name: fourth_stage_labor_bleeding_amount
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'perdarahanKalaIV2JamPostpartum')].values[0]
+      jsonPath: $[0]
+    - name: helper
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'penolong')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: high_risk_post_partum_infection
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumInfection')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_post_partum_maternal_sepsis
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumMaternalSepsis')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_post_partum_forceps
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumForceps')].values[0]
+      jsonPath: $[0]
+    - name: birth_center
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'alamatBersalin')].values[0]
+      jsonPath: $[0]
+    - name: birth_method 
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'caraPersalinanIbu')].humanReadableValues[0]
       jsonPath: $[0]
