@@ -887,3 +887,99 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPregnancyDiabetes')].values[0]
       jsonPath: $[0]
+    - name: treatment_diabetes
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentDiabetesTxt')].values[0]
+      jsonPath: $[0]
+    - name: reference_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referenceDate')].values[0]
+      jsonPath: $[0]
+    - name: has_proteinuria
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumProteinUria')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: has_anemia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumPeriksaHbAnemia')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: has_thalasemia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumThalasemia')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: high_risk_pregnancy_anemia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPregnancyAnemia')].values[0]
+      jsonPath: $[0]
+    - name: treatment_anemia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentAnemiaTxt')].values[0]
+      jsonPath: $[0]
+    - name: treatment_thalasemia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentThalasemiaTxt')].values[0]
+      jsonPath: $[0]
+    - name: treatment_syphilis
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentSifilisTxt')].values[0]
+      jsonPath: $[0]
+    - name: treatment_hbsag
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentHbsagTxt')].values[0]
+      jsonPath: $[0]
+    - name: other_checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksaOther')].values[0]
+      jsonPath: $[0]
+    - name: treatment_proteinuria
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentProturinTxt')].values[0]
+      jsonPath: $[0]
+    - name: has_syphilis
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumSifilis')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksa')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: hb_level_lab_test_result
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumPeriksaHbHasil')].values[0]
+      jsonPath: $[0]
+    - name: is_glucose_blood_more_than_140_mg_dl
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumGulaDarah')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: has_hbsag
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumHbsAg')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: anc_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ancId')].values[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
+      jsonPath: $[0]
