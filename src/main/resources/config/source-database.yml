@@ -9,15 +9,37 @@ source-database:
       ORDER BY ${source-database.tables[0].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
   - destinationTableName: ${destination-database.tables[1].name}
     name: core.client
-    query: SELECT * FROM ${source-database.tables[1].name}
-      WHERE ${source-database.tables[1].idColumnName} > %s
-      AND "json" ->> 'firstName' = '-'
-      AND "json" ->> 'lastName' = '-'
+    query: SELECT c.*, (
+        SELECT
+          event_json.obs_data -> 'values' ->> 0 AS child_full_name
+        FROM (
+          SELECT
+            jsonb_array_elements(
+              (
+                SELECT e."json"
+                FROM core."event" e
+                WHERE e."json" ->> 'baseEntityId' = c."json" ->> 'baseEntityId'
+                AND e."json" ->> 'eventType' = 'Child Registration'
+                ORDER BY e."json" ->> 'dateCreated' DESC
+                LIMIT 1
+              ) -> 'obs'
+            ) AS obs_data
+          ) event_json
+        WHERE
+          event_json.obs_data ->> 'formSubmissionField' = 'namaBayi'
+        LIMIT 1
+      )
+      FROM ${source-database.tables[1].name} c
+      WHERE c.${source-database.tables[1].idColumnName} > %s
+      AND c."json" ->> 'firstName' = '-'
+      AND c."json" ->> 'lastName' = '-'
       ORDER BY ${source-database.tables[1].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
   - destinationTableName: ${destination-database.tables[2].name}
     name: core.event
     query: SELECT * FROM ${source-database.tables[2].name}
@@ -26,6 +48,7 @@ source-database:
       ORDER BY ${source-database.tables[2].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
   - destinationTableName: ${destination-database.tables[3].name}
     name: core.event
     query: SELECT * FROM ${source-database.tables[3].name}
@@ -34,11 +57,21 @@ source-database:
       ORDER BY ${source-database.tables[3].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
   - destinationTableName: ${destination-database.tables[4].name}
     name: core.event
     query: SELECT * FROM ${source-database.tables[4].name}
       WHERE ${source-database.tables[4].idColumnName} > %s
       AND "json" ->> 'eventType' = 'Kunjungan ANC'
       ORDER BY ${source-database.tables[4].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+
+  - destinationTableName: ${destination-database.tables[5].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[5].name}
+      WHERE ${source-database.tables[5].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Kunjungan ANC Lab Test'
+      ORDER BY ${source-database.tables[5].idColumnName} ASC
     idColumnName: id
     lastId: 0

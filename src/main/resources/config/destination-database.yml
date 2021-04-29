@@ -1,5 +1,5 @@
 destination-database:
-  schemaName: sid
+  schemaName: sid_bidan
   tables:
 
   # Legacy table name = 'client_ibu'
@@ -109,8 +109,7 @@ destination-database:
       jsonPath: $.baseEntityId
     - name: full_name
       typeName: varchar
-      sourceColumnName: json
-      jsonPath: $.firstName
+      sourceColumnName: child_full_name
     - name: birth_date
       typeName: timestamp with time zone
       sourceColumnName: json
@@ -289,6 +288,7 @@ destination-database:
       jsonFilter: $.obs[?(@.formSubmissionField == 'agama')].humanReadableValues[0]
       jsonPath: $[0]
 
+  # Legacy table name = 'tambah_anc'
   - name: ${destination-database.schemaName}.register_anc
     columns:
     - name: event_id
@@ -830,4 +830,60 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'fe1Fe3')].values[0]
+      jsonPath: $[0]
+
+  # Legacy table name = 'kunjungan_anc_lab_test'
+  - name: ${destination-database.schemaName}.lab_test_anc_visit
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: mother_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: high_risk_pregnancy_diabetes
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPregnancyDiabetes')].values[0]
       jsonPath: $[0]
