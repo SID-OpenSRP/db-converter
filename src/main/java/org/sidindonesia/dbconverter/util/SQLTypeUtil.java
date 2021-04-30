@@ -5,7 +5,9 @@ import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import java.math.BigDecimal;
 import java.sql.JDBCType;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -149,11 +151,11 @@ public final class SQLTypeUtil {
 			break;
 
 		case Types.DATE:
-			convertedObject = java.time.LocalDate.parse(stringValue, DATE_FORMATTER);
+			convertedObject = LocalDate.parse(stringValue, DATE_FORMATTER);
 			break;
 
 		case Types.TIME:
-			convertedObject = java.sql.Time.valueOf(stringValue);
+			convertedObject = LocalTime.parse(stringValue);
 			break;
 
 		case Types.TIMESTAMP_WITH_TIMEZONE:
