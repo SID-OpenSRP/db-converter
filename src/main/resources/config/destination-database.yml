@@ -1730,3 +1730,179 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'HighRiskChildLowBirthweght')].values[0]
       jsonPath: $[0]
+
+  # Legacy table name = 'kunjungan_neonatal'
+  - name: ${destination-database.schemaName}.neonatal_visit
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: child_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: neonatal_visit_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tanggalKunjunganBayiPerbulan')].values[0]
+      jsonPath: $[0]
+    - name: neonatal_complications
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'komplikasiNeonatal')].humanReadableValues
+      jsonPath: $[0]
+    - name: is_neonatal_complications_handled
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'komplikasiNeonatalTertangani')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: high_risk_child_hypothermia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildHypothermia')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_child_congenital_abnormality
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildCongenitalAbnormality')].values[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'desa_anak')].values[0]
+      jsonPath: $[0]
+    - name: child_condition
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'kondisiBayi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: newborn_services
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'jenisPelayanan')].humanReadableValues
+      jsonPath: $[0]
+    - name: child_respiration_rate
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'frekuensiNapas')].values[0]
+      jsonPath: $[0]
+    - name: child_heart_rate
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'frekuensiDenyutJantung')].values[0]
+      jsonPath: $[0]
+    - name: neonatal_visit_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'kunjunganNeonatal')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: neonatal_visit_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'kunjunganNeonatal')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: high_risk_child_asphyxia
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildAsphyxia')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_child_birth_trauma
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildBirthTrauma')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_child_neonatal_sepsis
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildNeonatalSepsis')].values[0]
+      jsonPath: $[0]
+    - name: child_length
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'panjangBayi')].values[0]
+      jsonPath: $[0]
+    - name: is_referred
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'rujukanNeonatal')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: high_risk_child_tetanus_neonatorum
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildTetanusNeonatorum')].values[0]
+      jsonPath: $[0]
+    - name: child_body_temperature
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'suhuBayi')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_child_icterus
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildIterus')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_child_infection
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskChildInfection')].values[0]
+      jsonPath: $[0]
+    - name: child_weight
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'beratBayi')].values[0]
+      jsonPath: $[0]
+    - name: hb0_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hb0')].values[0]
+      jsonPath: $[0]
+    - name: checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksa')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: neonatal_checklist
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pemeriksaanNeonatal')].values[0]
+      jsonPath: $[0]

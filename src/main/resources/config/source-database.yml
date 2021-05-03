@@ -120,3 +120,12 @@ source-database:
       ORDER BY ${source-database.tables[10].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[11].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[11].name}
+      WHERE ${source-database.tables[11].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Kunjungan neonatal'
+      ORDER BY ${source-database.tables[11].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
