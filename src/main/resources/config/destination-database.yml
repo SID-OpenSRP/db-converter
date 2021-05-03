@@ -984,6 +984,132 @@ destination-database:
       jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
       jsonPath: $[0]
 
+  # Legacy table name = 'kunjungan_anc_integrasi'
+  - name: ${destination-database.schemaName}.integrated_anc_visit
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: mother_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: high_risk_tuberculosis
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'High_Risk_TBC')].values[0]
+      jsonPath: $[0]
+    - name: program_integration_malaria_blood_check
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgramMalariaPeriksaDarah')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: program_integration_malaria_medication
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgramMalariaObat')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: program_integration_has_mosquito_net
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgramMalariaKelambuBerinsektisida')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: anc_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ancId')].values[0]
+      jsonPath: $[0]
+    - name: other_checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksaOther')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_malaria
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'High_Risk_malaria')].values[0]
+      jsonPath: $[0]
+    - name: program_integration_tuberculosis_phlegm
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgramtbDahak')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: program_integration_tuberculosis_medication
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgramtbObat')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: program_integration_pmtct_arv_prophylaxis
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgrampmtctarvProfilaksis')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
+      jsonPath: $[0]
+    - name: reference_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referenceDate')].values[0]
+      jsonPath: $[0]
+    - name: program_integration_pmtct_is_voluntary_counseling_test
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgrampmtctvct')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: program_integration_pmtct_blood_check
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgrampmtctPeriksaDarah')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: program_integration_pmtct_serology
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'integrasiProgrampmtctSerologi')].humanReadableValues[0]
+      jsonPath: $[0]
+
   # Legacy table name = 'rencana_persalinan'
   - name: ${destination-database.schemaName}.birth_plan
     columns:
@@ -1532,4 +1658,75 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'bleeding')].values[0]
+      jsonPath: $[0]
+
+  # Legacy table name = 'child_registration'
+  - name: ${destination-database.schemaName}.child_registration
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: child_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: full_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'namaBayi')].values[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'desa_anak')].values[0]
+      jsonPath: $[0]
+    - name: birth_weight
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'beratLahir')].values[0]
+      jsonPath: $[0]
+    - name: high_risk_child_low_birth_weight
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'HighRiskChildLowBirthweght')].values[0]
       jsonPath: $[0]
