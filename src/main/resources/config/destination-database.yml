@@ -1906,3 +1906,144 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'pemeriksaanNeonatal')].values[0]
       jsonPath: $[0]
+
+  # Legacy table name = 'kohort_kunjungan_bayi_perbulan'
+  - name: ${destination-database.schemaName}.infant_visit
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: child_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: baby_weight_monitoring_indicator
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'indikatorBeratBadanBayi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: other_checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksaOther')].values[0]
+      jsonPath: $[0]
+    - name: child_length
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'panjangBayi')].values[0]
+      jsonPath: $[0]
+    - name: referral_facility
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'dirujukKeBayi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: disease
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'penyakit')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksa')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: child_visit_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'kunjunganBayiKe')].values[0]
+      jsonPath: $[0]
+    - name: child_nutritional_status
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'statusGizi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: is_given_vitamin_a
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pelayananVita')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: child_health_status
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'statusKesehatanBayi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: month_of_exclusive_breastfeeding_given
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'AsiAksklusif')].values[0]
+      jsonPath: $[0]
+    - name: child_development_pre_screening_result
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hasilDilakukannyaKPSP')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: is_given_integrated_management_of_childhood_illness
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'mtbs')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: is_referred
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'rujukanBayi')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'desa_anak')].values[0]
+      jsonPath: $[0]
+    - name: visit_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tanggalKunjunganBayiPerbulan')].values[0]
+      jsonPath: $[0]
+    - name: child_age_during_visit
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'babyAge')].values[0]
+      jsonPath: $[0]
+    - name: child_weight
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'beratBayi')].values[0]
+      jsonPath: $[0]
