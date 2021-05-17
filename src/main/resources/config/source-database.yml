@@ -219,3 +219,21 @@ source-database:
       ORDER BY ${source-database.tables[21].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[22].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[22].name}
+      WHERE ${source-database.tables[22].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Penutupan KB'
+      ORDER BY ${source-database.tables[22].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+
+  - destinationTableName: ${destination-database.tables[23].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[23].name}
+      WHERE ${source-database.tables[23].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Penutupan Anak'
+      ORDER BY ${source-database.tables[23].idColumnName} ASC
+    idColumnName: id
+    lastId: 0

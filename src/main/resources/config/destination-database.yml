@@ -2935,4 +2935,180 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
       jsonPath: $[0]
-    
+
+  # Legacy table name = 'penutupan_kb'
+  - name: ${destination-database.schemaName}.family_planning_close
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: mother_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
+      jsonPath: $[0]
+    - name: contraception_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'jenisKontrasepsi')].values[0]
+      jsonPath: $[0]
+    - name: drop_out_info
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'keterangan_do')].values[0]
+      jsonPath: $[0]
+    - name: is_confirmed
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'isKBCloseConfirmed')].values[0]
+      jsonPath: $[0]
+    - name: failure_reason
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'keteranganGagal')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: family_planning_close_reason
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'kbCloseReason')].humanReadableValues[0]
+      jsonPath: $[0]
+
+  # Legacy table name = 'penutupan_anak'
+  - name: ${destination-database.schemaName}.child_close
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: child_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: close_reason
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'closeReason')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: is_referred
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referred')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: child_death_cause
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'childDeathCause')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: place_of_death
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'placeOfDeath')].values[0]
+      jsonPath: $[0]
+    - name: referral_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referralLocation')].values[0]
+      jsonPath: $[0]
+    - name: other_child_death_cause
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'childDeathCauseOther')].values[0]
+      jsonPath: $[0]
+    - name: other_child_death_cause
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'childDeathCauseOther')].values[0]
+      jsonPath: $[0]
+    - name: pre_referral_management
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'prereferralManagement')].values[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'desa_anak')].values[0]
+      jsonPath: $[0]
