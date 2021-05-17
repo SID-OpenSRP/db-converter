@@ -210,3 +210,12 @@ source-database:
       ORDER BY ${source-database.tables[20].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[21].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[21].name}
+      WHERE ${source-database.tables[21].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Penutupan PNC'
+      ORDER BY ${source-database.tables[21].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
