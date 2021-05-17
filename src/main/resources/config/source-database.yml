@@ -156,3 +156,12 @@ source-database:
       ORDER BY ${source-database.tables[14].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[15].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[15].name}
+      WHERE ${source-database.tables[15].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Tambah Bayi'
+      ORDER BY ${source-database.tables[15].idColumnName} ASC
+    idColumnName: id
+    lastId: 0

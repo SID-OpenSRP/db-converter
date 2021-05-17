@@ -2289,3 +2289,99 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'panjangBayi')].values[0]
       jsonPath: $[0]
+
+  # Legacy table name = 'tambah_bayi'
+  - name: ${destination-database.schemaName}.child_register
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: child_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: other_checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksaOther')].values[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
+      jsonPath: $[0]
+    - name: device_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'deviceid')].values[0]
+      jsonPath: $[0]
+    - name: sim_serial
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'simserial')].values[0]
+      jsonPath: $[0]
+    - name: phone_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phonenumber')].values[0]
+      jsonPath: $[0]
+    - name: checkup_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lokasiPeriksa')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: instance_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'instanceID')].values[0]
+      jsonPath: $[0]
+    - name: registration_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tanggalPendaftaran')].values[0]
+      jsonPath: $[0]
+    - name: checkup_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tanggalPeriksa')].values[0]
+      jsonPath: $[0]
