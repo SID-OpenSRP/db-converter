@@ -151,6 +151,8 @@ public final class SQLTypeUtil {
 			break;
 
 		case Types.DATE:
+			if (stringValue.contains("T"))
+				stringValue = stringValue.substring(0, stringValue.indexOf("T"));
 			convertedObject = LocalDate.parse(stringValue, DATE_FORMATTER);
 			break;
 
