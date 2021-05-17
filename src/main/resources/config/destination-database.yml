@@ -2752,3 +2752,33 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'closeReason')].humanReadableValues[0]
       jsonPath: $[0]
+    - name: maternal_death_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'maternalDeathDate')].values[0]
+      jsonPath: $[0]
+    - name: place_of_death
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'placeOfDeath')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: maternal_death_cause
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'maternalDeathCause')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: birth_attendant
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'birthAttendant')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: is_referred
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referred')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: referral_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referralLocation')].values[0]
+      jsonPath: $[0]
