@@ -2047,3 +2047,124 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'beratBayi')].values[0]
       jsonPath: $[0]
+
+  # Legacy table name = 'imunisasi_bayi'
+  - name: ${destination-database.schemaName}.child_immunizations
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: child_base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: hb0_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hb0')].values[0]
+      jsonPath: $[0]
+    - name: bcg_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'bcg')].values[0]
+      jsonPath: $[0]
+    - name: polio4_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'polio4')].values[0]
+      jsonPath: $[0]
+    - name: measles_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'campak')].values[0]
+      jsonPath: $[0]
+    - name: polio2_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'polio2')].values[0]
+      jsonPath: $[0]
+    - name: dpt_hb2_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'dptHb2')].values[0]
+      jsonPath: $[0]
+    - name: polio3_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'polio3')].values[0]
+      jsonPath: $[0]
+    - name: dpt_hb3_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'dptHb3')].values[0]
+      jsonPath: $[0]
+    - name: ipv_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ipv')].values[0]
+      jsonPath: $[0]
+    - name: dpt_hb_booster_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'dpt_hb_lanjutan')].values[0]
+      jsonPath: $[0]
+    - name: village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'desa_anak')].values[0]
+      jsonPath: $[0]
+    - name: polio1_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'polio1')].values[0]
+      jsonPath: $[0]
+    - name: dpt_hb1_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'dptHb1')].values[0]
+      jsonPath: $[0]
+    - name: measles_booster_vaccine_date
+      typeName: date
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'campak_lanjutan')].values[0]
+      jsonPath: $[0]
