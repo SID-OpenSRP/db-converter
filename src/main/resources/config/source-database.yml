@@ -237,3 +237,30 @@ source-database:
       ORDER BY ${source-database.tables[23].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[24].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[24].name}
+      WHERE ${source-database.tables[24].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Edit Ibu'
+      ORDER BY ${source-database.tables[24].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+
+  - destinationTableName: ${destination-database.tables[25].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[25].name}
+      WHERE ${source-database.tables[25].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Edit Bayi'
+      ORDER BY ${source-database.tables[25].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+
+  - destinationTableName: ${destination-database.tables[26].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[26].name}
+      WHERE ${source-database.tables[26].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Edit Tambah KB'
+      ORDER BY ${source-database.tables[26].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
