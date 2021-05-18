@@ -444,6 +444,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskHeartDisorder')].values[0]
       jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: partus
       typeName: varchar
       sourceColumnName: json
@@ -756,6 +761,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'statusImunisasitt')].humanReadableValues[0]
       jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: checkup_location
       typeName: varchar
       sourceColumnName: json
@@ -891,6 +901,11 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPregnancyDiabetes')].values[0]
+      jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
       jsonPath: $[0]
     - name: treatment_diabetes
       typeName: varchar
@@ -1065,6 +1080,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'ancId')].values[0]
       jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: other_checkup_location
       typeName: varchar
       sourceColumnName: json
@@ -1211,6 +1231,11 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
+      jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
       jsonPath: $[0]
     - name: other_checkup_location
       typeName: varchar
@@ -1383,6 +1408,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'persentasi')].humanReadableValues[0]
       jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: last_menstrual_period_date
       typeName: date
       sourceColumnName: json
@@ -1504,6 +1534,11 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumPIH')].values[0]
+      jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
       jsonPath: $[0]
     - name: program_integration_antimalarial_drug
       typeName: varchar
@@ -2357,6 +2392,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
       jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: device_id
       typeName: varchar
       sourceColumnName: json
@@ -2443,6 +2483,11 @@ destination-database:
       typeLength: 36
       sourceColumnName: json
       jsonPath: $.formSubmissionId
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: visit_date
       typeName: date
       sourceColumnName: json
@@ -2670,6 +2715,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
       jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
+      jsonPath: $[0]
     - name: contraception_type
       typeName: varchar
       sourceColumnName: json
@@ -2756,6 +2806,11 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'closeReason')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
       jsonPath: $[0]
     - name: maternal_death_date
       typeName: date
@@ -2929,6 +2984,11 @@ destination-database:
       typeLength: 36
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'ancId')].values[0]
+      jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
       jsonPath: $[0]
     - name: pnc_close_reason
       typeName: varchar
@@ -3414,6 +3474,11 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'alkilila')].values[0]
+      jsonPath: $[0]
+    - name: sub_village
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'address1')].values[0]
       jsonPath: $[0]
     - name: birth_date
       typeName: date
