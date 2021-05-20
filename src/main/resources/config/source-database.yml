@@ -62,4 +62,11 @@ source-database:
     idColumnName: id
     lastId: 0
 
-#sample_collection
+  - destinationTableName: ${destination-database.tables[7].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[7].name}
+      WHERE ${source-database.tables[7].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'sample_collection'
+      ORDER BY ${source-database.tables[7].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
