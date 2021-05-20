@@ -1508,6 +1508,16 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'sampler_name')].values[0]
       jsonPath: $[0]
+    - name: sampler_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'sampler_id')].values[0]
+      jsonPath: $[0]
+    - name: sampler_phone_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'sampler_phone_number')].values[0]
+      jsonPath: $[0]
     - name: sample_type
       typeName: varchar
       sourceColumnName: json
