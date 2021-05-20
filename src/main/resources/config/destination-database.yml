@@ -518,6 +518,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'sender_email')].values[0]
       jsonPath: $[0]
+    - name: batch_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'batch_id')].values[0]
+      jsonPath: $[0]
     - name: start_date_time
       typeName: varchar
       sourceColumnName: json
