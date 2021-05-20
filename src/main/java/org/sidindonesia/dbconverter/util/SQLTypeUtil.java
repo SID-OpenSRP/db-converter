@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SQLTypeUtil {
-	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("y-M-d");
+	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-M-y");
 
 	/**
 	 * Translates a data type from an integer (java.sql.Types value) to a string
