@@ -158,6 +158,16 @@ destination-database:
       typeLength: 36
       sourceColumnName: json
       jsonPath: $.formSubmissionId
+    - name: patient_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_id')].values[0]
+      jsonPath: $[0]
+    - name: medical_record_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'medical_record_id')].values[0]
+      jsonPath: $[0]
     - name: national_id_type
       typeName: varchar
       sourceColumnName: json
