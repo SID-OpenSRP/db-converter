@@ -1218,6 +1218,26 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'has_local_transmission_area_travel_history')].values[0]
       jsonPath: $[0]
+    - name: local_area_province
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'local_area_province')].values[0]
+      jsonPath: $[0]
+    - name: local_area_city
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'local_area_city')].values[0]
+      jsonPath: $[0]
+    - name: local_area_travel_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'local_area_travel_date')].values[0]
+      jsonPath: $[0]
+    - name: local_area_arrival_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'local_area_arrival_date')].values[0]
+      jsonPath: $[0]
     - name: has_close_contact_with_sick_traveller
       typeName: varchar
       sourceColumnName: json
@@ -1277,6 +1297,61 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'dead_ard_patient_contacts_count')].values[0]
+      jsonPath: $[0]
+    - name: covid_close_contacts_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /covid_close_contacts_name.*/i)].values[0]
+      jsonPath: $[0]
+    - name: covid_close_contacts_phone_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /covid_close_contacts_phone_number.*/i)].values[0]
+      jsonPath: $[0]
+    - name: covid_close_contacts_relationship
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /covid_close_contacts_relationship.*/i)].values[0]
+      jsonPath: $[0]
+    - name: has_close_contact_with_infectious_animal_desc
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /has_close_contact_with_infectious_animal_.*/i)].values[0]
+      jsonPath: $[0]
+    - name: covid_close_contacts_date_of_first_contact
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /covid_close_contacts_date_of_first_contact.*/i)].values[0]
+      jsonPath: $[0]
+    - name: covid_close_contacts_date_of_last_contact
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /covid_close_contacts_date_of_last_contact.*/i)].values[0]
+      jsonPath: $[0]
+    - name: close_contact_ari_patient_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /close_contact_ari_patient_name.*/i)].values[0]
+      jsonPath: $[0]
+    - name: close_contact_ari_patient_phone_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /close_contact_ari_patient_phone_number.*/i)].values[0]
+      jsonPath: $[0]
+    - name: close_contact_ari_patient_relationship
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /close_contact_ari_patient_relationship.*/i)].values[0]
+      jsonPath: $[0]
+    - name: close_contact_ari_patient_date_of_first_contact
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /close_contact_ari_patient_date_of_first_contact.*/i)].values[0]
+      jsonPath: $[0]
+    - name: close_contact_ari_patient_date_of_last_contact
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField =~ /close_contact_ari_patient_date_of_last_contact.*/i)].values[0]
       jsonPath: $[0]
     - name: patient_case_category
       typeName: varchar
