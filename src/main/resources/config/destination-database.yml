@@ -158,6 +158,16 @@ destination-database:
       typeLength: 36
       sourceColumnName: json
       jsonPath: $.formSubmissionId
+    - name: patient_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_id')].values[0]
+      jsonPath: $[0]
+    - name: medical_record_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'medical_record_id')].values[0]
+      jsonPath: $[0]
     - name: national_id_type
       typeName: varchar
       sourceColumnName: json
@@ -203,60 +213,25 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'domicile_same_as_gvt_id_address')].values[0]
       jsonPath: $[0]
-    - name: patient_whatsapp
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_whatsapp')].values[0]
-      jsonPath: $[0]
-    - name: head_of_household_no
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'head_of_household_no')].values[0]
-      jsonPath: $[0]
     - name: taken_tests_before
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'taken_tests_before')].values[0]
       jsonPath: $[0]
-    - name: start_date_time
+    - name: phone_os_version
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
-      jsonPath: $[0]
-    - name: end_date_time
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'end')].values[0]
-      jsonPath: $[0]
-    - name: deviceid
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'deviceid')].values[0]
-      jsonPath: $[0]
-    - name: subscriberid
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'subscriberid')].values[0]
-      jsonPath: $[0]
-    - name: simserial
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'simserial')].values[0]
-      jsonPath: $[0]
-    - name: phone_manufacturer
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_manufacturer')].values[0]
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_os_version')].values[0]
       jsonPath: $[0]
     - name: app_version
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'app_version')].values[0]
       jsonPath: $[0]
-    - name: phone_os_version
+    - name: phone_manufacturer
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_os_version')].values[0]
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_manufacturer')].values[0]
       jsonPath: $[0]
     - name: phone_model
       typeName: varchar
