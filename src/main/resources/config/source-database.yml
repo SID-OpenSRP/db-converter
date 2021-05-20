@@ -26,9 +26,15 @@ source-database:
     idColumnName: id
     lastId: 0
 
-#covid_patient_registration
-#covid_wbc
-#sample_delivery_details
+  - destinationTableName: ${destination-database.tables[3].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[3].name}
+      WHERE ${source-database.tables[3].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'sample_delivery_details'
+      ORDER BY ${source-database.tables[3].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+
 #covid_rdt_test
 #covid_xray
 #patient_diagnostics
