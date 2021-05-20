@@ -948,3 +948,383 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'last_known_location')].values[0]
       jsonPath: $[0]
+
+  - name: ${destination-database.schemaName}.patient_diagnostics
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: source_server_version
+      typeName: integer
+      sourceColumnName: server_version
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: rev
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $._rev
+    - name: team
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.team
+    - name: type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.type
+    - name: team_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.teamId
+    - name: details_form_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.formVersion
+    - name: details_app_version_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.appVersionName
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: duration
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.duration
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: entity_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.entityType
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: facility_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'facility_type')].values[0]
+      jsonPath: $[0]
+    - name: facility_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'facility_name')].values[0]
+      jsonPath: $[0]
+    - name: patient_age
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_age')].values[0]
+      jsonPath: $[0]
+    - name: patient_sex
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_sex')].values[0]
+      jsonPath: $[0]
+    - name: using_ventilator
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'using_ventilator')].values[0]
+      jsonPath: $[0]
+    - name: has_chronic_liver_disease_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_chronic_liver_disease_history')].values[0]
+      jsonPath: $[0]
+    - name: has_cancer_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_cancer_history')].values[0]
+      jsonPath: $[0]
+    - name: has_chronic_heart_disease_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_chronic_heart_disease_history')].values[0]
+      jsonPath: $[0]
+    - name: has_chronic_lung_disease_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_chronic_lung_disease_history')].values[0]
+      jsonPath: $[0]
+    - name: has_chronic_kidney_disease_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_chronic_kidney_disease_history')].values[0]
+      jsonPath: $[0]
+    - name: has_diabetes
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_diabetes')].values[0]
+      jsonPath: $[0]
+    - name: has_gout_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_gout_history')].values[0]
+      jsonPath: $[0]
+    - name: has_autoimmune_disease_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_autoimmune_disease_history')].values[0]
+      jsonPath: $[0]
+    - name: has_neurological_disease
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_neurological_disease')].values[0]
+      jsonPath: $[0]
+    - name: has_hiv
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_hiv')].values[0]
+      jsonPath: $[0]
+    - name: has_hypertension
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_hypertension')].values[0]
+      jsonPath: $[0]
+    - name: has_other_health_issues
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_other_health_issues')].values[0]
+      jsonPath: $[0]
+    - name: date_of_onset_of_symptoms
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'date_of_onset_of_symptoms')].values[0]
+      jsonPath: $[0]
+    - name: has_fever
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_fever')].values[0]
+      jsonPath: $[0]
+    - name: has_fever_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_fever_history')].values[0]
+      jsonPath: $[0]
+    - name: has_nausea
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_nausea')].values[0]
+      jsonPath: $[0]
+    - name: has_diarrhoea
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_diarrhoea')].values[0]
+      jsonPath: $[0]
+    - name: has_sore_throat
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_sore_throat')].values[0]
+      jsonPath: $[0]
+    - name: has_cough
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_cough')].values[0]
+      jsonPath: $[0]
+    - name: has_cold
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_cold')].values[0]
+      jsonPath: $[0]
+    - name: has_lost_smell
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_lost_smell')].values[0]
+      jsonPath: $[0]
+    - name: has_decreased_taste_sensitivity
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_decreased_taste_sensitivity')].values[0]
+      jsonPath: $[0]
+    - name: has_shortness_of_breath
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_shortness_of_breath')].values[0]
+      jsonPath: $[0]
+    - name: has_abnormal_headaches
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_abnormal_headaches')].values[0]
+      jsonPath: $[0]
+    - name: has_chest_pains
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_chest_pains')].values[0]
+      jsonPath: $[0]
+    - name: has_muscle_pains
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_muscle_pains')].values[0]
+      jsonPath: $[0]
+    - name: has_abdominal_pain
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_abdominal_pain')].values[0]
+      jsonPath: $[0]
+    - name: has_fatigue
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_fatigue')].values[0]
+      jsonPath: $[0]
+    - name: feels_malaised
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'feels_malaised')].values[0]
+      jsonPath: $[0]
+    - name: has_international_travel_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_international_travel_history')].values[0]
+      jsonPath: $[0]
+    - name: international_travel_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'international_travel_location')].values[0]
+      jsonPath: $[0]
+    - name: international_country
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'international_country')].values[0]
+      jsonPath: $[0]
+    - name: international_city
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'international_city')].values[0]
+      jsonPath: $[0]
+    - name: international_travel_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'international_travel_date')].values[0]
+      jsonPath: $[0]
+    - name: international_arrival_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'international_arrival_date')].values[0]
+      jsonPath: $[0]
+    - name: has_local_transmission_area_travel_history
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_local_transmission_area_travel_history')].values[0]
+      jsonPath: $[0]
+    - name: has_close_contact_with_sick_traveller
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_close_contact_with_sick_traveller')].values[0]
+      jsonPath: $[0]
+    - name: has_close_contact_with_covid_patient
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_close_contact_with_covid_patient')].values[0]
+      jsonPath: $[0]
+    - name: has_contact_with_ari_patients
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_contact_with_ari_patients')].values[0]
+      jsonPath: $[0]
+    - name: has_contact_with_hospitalized_ard_patients
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_contact_with_hospitalized_ard_patients')].values[0]
+      jsonPath: $[0]
+    - name: has_contact_with_dead_ard_patients
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_contact_with_dead_ard_patients')].values[0]
+      jsonPath: $[0]
+    - name: has_close_contact_with_infectious_animal
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'has_close_contact_with_infectious_animal')].values[0]
+      jsonPath: $[0]
+    - name: is_part_of_ari_cluster
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'is_part_of_ari_cluster')].values[0]
+      jsonPath: $[0]
+    - name: is_patient_health_worker
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'is_patient_health_worker')].values[0]
+      jsonPath: $[0]
+    - name: covid_close_contacts_count
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'covid_close_contacts_count')].values[0]
+      jsonPath: $[0]
+    - name: close_ari_patient_contacts_count
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'close_ari_patient_contacts_count')].values[0]
+      jsonPath: $[0]
+    - name: hospitalized_ard_patient_contacts_count
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hospitalized_ard_patient_contacts_count')].values[0]
+      jsonPath: $[0]
+    - name: dead_ard_patient_contacts_count
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'dead_ard_patient_contacts_count')].values[0]
+      jsonPath: $[0]
+    - name: patient_case_category
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_case_category')].values[0]
+      jsonPath: $[0]
+    - name: phone_os_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_os_version')].values[0]
+      jsonPath: $[0]
+    - name: app_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'app_version')].values[0]
+      jsonPath: $[0]
+    - name: phone_manufacturer
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_manufacturer')].values[0]
+      jsonPath: $[0]
+    - name: phone_model
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_model')].values[0]
+      jsonPath: $[0]
+    - name: last_known_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'last_known_location')].values[0]
+      jsonPath: $[0]

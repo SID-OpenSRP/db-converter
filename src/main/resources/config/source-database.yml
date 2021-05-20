@@ -53,5 +53,13 @@ source-database:
     idColumnName: id
     lastId: 0
 
-#patient_diagnostics
+  - destinationTableName: ${destination-database.tables[6].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[6].name}
+      WHERE ${source-database.tables[6].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'patient_diagnostics'
+      ORDER BY ${source-database.tables[6].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
+
 #sample_collection
