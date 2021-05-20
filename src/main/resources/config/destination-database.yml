@@ -813,3 +813,138 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'last_known_location')].values[0]
       jsonPath: $[0]
+
+  - name: ${destination-database.schemaName}.covid_xray
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: source_server_version
+      typeName: integer
+      sourceColumnName: server_version
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: rev
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $._rev
+    - name: team
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.team
+    - name: type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.type
+    - name: team_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.teamId
+    - name: details_form_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.formVersion
+    - name: details_app_version_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.appVersionName
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: duration
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.duration
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: entity_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.entityType
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: is_xray_taken
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'is_xray_taken')].values[0]
+      jsonPath: $[0]
+    - name: lung_xray_result
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lung_xray_result')].values[0]
+      jsonPath: $[0]
+    - name: start_date_time
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
+      jsonPath: $[0]
+    - name: end_date_time
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'end')].values[0]
+      jsonPath: $[0]
+    - name: deviceid
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'deviceid')].values[0]
+      jsonPath: $[0]
+    - name: phone_os_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_os_version')].values[0]
+      jsonPath: $[0]
+    - name: app_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'app_version')].values[0]
+      jsonPath: $[0]
+    - name: phone_manufacturer
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_manufacturer')].values[0]
+      jsonPath: $[0]
+    - name: phone_model
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_model')].values[0]
+      jsonPath: $[0]
+    - name: last_known_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'last_known_location')].values[0]
+      jsonPath: $[0]
