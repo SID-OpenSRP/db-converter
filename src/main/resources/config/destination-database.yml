@@ -183,6 +183,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'age')].values[0]
       jsonPath: $[0]
+    - name: patient_occupation
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'patient_occupation')].values[0]
+      jsonPath: $[0]
     - name: patient_phone_number
       typeName: varchar
       sourceColumnName: json
@@ -213,20 +218,75 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'domicile_same_as_gvt_id_address')].values[0]
       jsonPath: $[0]
+    - name: domicile_street_address
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'domicile_street_address')].values[0]
+      jsonPath: $[0]
+    - name: domicile_province
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'domicile_province')].values[0]
+      jsonPath: $[0]
+    - name: domicile_city
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'domicile_city')].values[0]
+      jsonPath: $[0]
     - name: patient_whatsapp
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'patient_whatsapp')].values[0]
+      jsonPath: $[0]
+    - name: head_of_household
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'head_of_household')].values[0]
       jsonPath: $[0]
     - name: head_of_household_no
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'head_of_household_no')].values[0]
       jsonPath: $[0]
+    - name: head_of_household_address
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'head_of_household_address')].values[0]
+      jsonPath: $[0]
     - name: taken_tests_before
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'taken_tests_before')].values[0]
+      jsonPath: $[0]
+    - name: no_of_covid_tests
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'no_of_covid_tests')].values[0]
+      jsonPath: $[0]
+    - name: latest_covid_test_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'latest_covid_test_date')].values[0]
+      jsonPath: $[0]
+    - name: test_location
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'test_location')].values[0]
+      jsonPath: $[0]
+    - name: type_of_test
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'type_of_test')].values[0]
+      jsonPath: $[0]
+    - name: antigen_pcr_or_genose_result
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'antigen_pcr_or_genose_result')].values[0]
+      jsonPath: $[0]
+    - name: follow_up
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'follow_up')].values[0]
       jsonPath: $[0]
     - name: start_date_time
       typeName: varchar
@@ -238,35 +298,20 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'end')].values[0]
       jsonPath: $[0]
-    - name: deviceid
+    - name: phone_os_version
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'deviceid')].values[0]
-      jsonPath: $[0]
-    - name: subscriberid
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'subscriberid')].values[0]
-      jsonPath: $[0]
-    - name: simserial
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'simserial')].values[0]
-      jsonPath: $[0]
-    - name: phone_manufacturer
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_manufacturer')].values[0]
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_os_version')].values[0]
       jsonPath: $[0]
     - name: app_version
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'app_version')].values[0]
       jsonPath: $[0]
-    - name: phone_os_version
+    - name: phone_manufacturer
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_os_version')].values[0]
+      jsonFilter: $.obs[?(@.formSubmissionField == 'phone_manufacturer')].values[0]
       jsonPath: $[0]
     - name: phone_model
       typeName: varchar
