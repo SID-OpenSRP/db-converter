@@ -753,6 +753,16 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'gps_longitude')].values[0]
       jsonPath: $[0]
+    - name: gps_altitude
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gps_altitude')].values[0]
+      jsonPath: $[0]
+    - name: gps_accuracy
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gps_accuracy')].values[0]
+      jsonPath: $[0]
     - name: lbl_patient_name
       typeName: varchar
       sourceColumnName: json
@@ -768,6 +778,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'health_facility_name')].values[0]
       jsonPath: $[0]
+    - name: qr_code_reader
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'qr_code_reader')].values[0]
+      jsonPath: $[0]
     - name: rdt_type
       typeName: varchar
       sourceColumnName: json
@@ -777,6 +792,31 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'rdt_id')].values[0]
+      jsonPath: $[0]
+    - name: unique_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'unique_id')].values[0]
+      jsonPath: $[0]
+    - name: lot_no
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lot_no')].values[0]
+      jsonPath: $[0]
+    - name: exp_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'exp_date')].values[0]
+      jsonPath: $[0]
+    - name: gtin
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gtin')].values[0]
+      jsonPath: $[0]
+    - name: temp_sensor
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'temp_sensor')].values[0]
       jsonPath: $[0]
     - name: rdt_capture
       typeName: varchar
@@ -818,6 +858,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'is_manual_capture')].values[0]
       jsonPath: $[0]
+    - name: detected_component_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'detected_component_type')].values[0]
+      jsonPath: $[0]
     - name: chw_rdt_type
       typeName: varchar
       sourceColumnName: json
@@ -832,6 +877,16 @@ destination-database:
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'antibody_type')].values[0]
+      jsonPath: $[0]
+    - name: rdt_manufacturer
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'rdt_manufacturer')].values[0]
+      jsonPath: $[0]
+    - name: rdt_device_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'rdt_device_name')].values[0]
       jsonPath: $[0]
     - name: start_date_time
       typeName: varchar
