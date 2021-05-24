@@ -1183,6 +1183,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'facility_type')].values[0]
       jsonPath: $[0]
+    - name: other_facility_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'other_facility_type')].values[0]
+      jsonPath: $[0]
     - name: facility_name
       typeName: varchar
       sourceColumnName: json
