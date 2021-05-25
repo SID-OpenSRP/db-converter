@@ -1,0 +1,4 @@
+[submodule "configs"]
+	path = configs
+	url = https://github.com/sid-indonesia/opensrp-server-configs
+	branch = master
