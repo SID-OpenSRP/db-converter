@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   destination-datasource:
     name: destination
-    jdbc-url: jdbc:postgresql://postgres:5432/dbconverter_test
+    jdbc-url: jdbc:postgresql://postgres:5432/opensrp_test
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

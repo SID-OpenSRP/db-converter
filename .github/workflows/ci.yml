@@ -18,6 +18,7 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: opensrp_test
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -29,9 +30,6 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
-
-      - name: Run migrations
-        run: ./ci-migrations.sh
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
