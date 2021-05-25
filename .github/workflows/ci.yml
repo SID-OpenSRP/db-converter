@@ -35,7 +35,7 @@ jobs:
           submodules: recursive
 
       - name: Configure migrations
-        run: chmod +x configs/assets/migrations/run_mybatis_migrations.sh && sudo ./configs/assets/migrations/run_mybatis_migrations.sh
+        run: chmod +x configs/assets/migrations/run_mybatis_migrations.sh && ./configs/assets/migrations/run_mybatis_migrations.sh
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
