@@ -25,3 +25,12 @@ source-database:
       ORDER BY ${source-database.tables[2].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[3].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[3].name}
+      WHERE ${source-database.tables[3].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Profile'
+      ORDER BY ${source-database.tables[3].idColumnName} ASC
+    idColumnName: id
+    lastId: 0

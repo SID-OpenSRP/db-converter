@@ -256,8 +256,7 @@ destination-database:
     - name: cohabitants
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'cohabitants')].values[0]
-      jsonPath: $
+      jsonPath: $.obs[?(@.formSubmissionField == 'cohabitants')].values[0]
     - name: last_interacted_with
       typeName: varchar
       sourceColumnName: json
@@ -378,9 +377,426 @@ destination-database:
     - name: danger_signs
       typeName: varchar
       sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'danger_signs')].humanReadableValues[0]
-      jsonPath: $
-    - name: start
+      jsonPath: $.obs[?(@.formSubmissionField == 'danger_signs')].humanReadableValues[0]
+    - name: start_date_time
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
+      jsonPath: $[0]
+
+  - name: ${destination-database.schemaName}.profile
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: source_server_version
+      typeName: integer
+      sourceColumnName: server_version
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: rev
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $._rev
+    - name: team
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.team
+    - name: type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.type
+    - name: team_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.teamId
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: client_database_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.clientDatabaseVersion
+    - name: client_application_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.clientApplicationVersion
+    - name: duration
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.duration
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: entity_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.entityType
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: object_identifiers
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.identifiers
+    - name: details_form_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.formVersion
+    - name: details_app_version_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.appVersionName
+    - name: educ_level
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'educ_level')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: marital_status
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'marital_status')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: occupation
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'occupation')].humanReadableValues[0]
+    - name: occupation_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'occupation_other')].values[0]
+      jsonPath: $[0]
+    - name: hiv_risk
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hiv_risk')].values[0]
+      jsonPath: $[0]
+    - name: lmp_known
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lmp_known')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: lmp_known_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lmp_known_date')].values[0]
+      jsonPath: $[0]
+    - name: lmp_edd
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lmp_edd')].values[0]
+      jsonPath: $[0]
+    - name: lmp_gest_age
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lmp_gest_age')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_done
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_done')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: ultrasound_done_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_done_date')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_gest_age_wks
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_gest_age_wks')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_gest_age_days
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_gest_age_days')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_gest_age_concept
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_gest_age_concept')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_edd
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_edd')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_ga_hidden
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_ga_hidden')].values[0]
+      jsonPath: $[0]
+    - name: ultrasound_gest_age
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ultrasound_gest_age')].values[0]
+      jsonPath: $[0]
+    - name: sfh_edd
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'sfh_edd')].values[0]
+      jsonPath: $[0]
+    - name: sfh_ga_hidden
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'sfh_ga_hidden')].values[0]
+      jsonPath: $[0]
+    - name: lmp_ultrasound_gest_age_selection
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'lmp_ultrasound_gest_age_selection')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: select_gest_age_edd_all_values
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'select_gest_age_edd_all_values')].values[0]
+      jsonPath: $[0]
+    - name: select_gest_age_edd_lmp_ultrasound
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'select_gest_age_edd_lmp_ultrasound')].values[0]
+      jsonPath: $[0]
+    - name: select_gest_age_edd_sfh_ultrasound
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'select_gest_age_edd_sfh_ultrasound')].values[0]
+      jsonPath: $[0]
+    - name: select_gest_age_edd
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'select_gest_age_edd')].values[0]
+      jsonPath: $[0]
+    - name: gest_age
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gest_age')].values[0]
+      jsonPath: $[0]
+    - name: gest_age_openmrs
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gest_age_openmrs')].values[0]
+      jsonPath: $[0]
+    - name: gravida
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gravida')].values[0]
+      jsonPath: $[0]
+    - name: previous_pregnancies
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'previous_pregnancies')].values[0]
+      jsonPath: $[0]
+    - name: miscarriages_abortions
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'miscarriages_abortions')].values[0]
+      jsonPath: $[0]
+    - name: live_births
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'live_births')].values[0]
+      jsonPath: $[0]
+    - name: last_live_birth_preterm
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'last_live_birth_preterm')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: parity
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'parity')].values[0]
+      jsonPath: $[0]
+    - name: c_sections
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'c_sections')].values[0]
+      jsonPath: $[0]
+    - name: prev_preg_comps
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'prev_preg_comps')].humanReadableValues[0]
+    - name: prev_preg_comps_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'prev_preg_comps_other')].values[0]
+      jsonPath: $[0]
+    - name: substances_used
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'substances_used')].humanReadableValues[0]
+    - name: substances_used_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'substances_used_other')].values[0]
+      jsonPath: $[0]
+    - name: preeclampsia_risk
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'preeclampsia_risk')].values[0]
+      jsonPath: $[0]
+    - name: gdm_risk
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gdm_risk')].values[0]
+      jsonPath: $[0]
+    - name: allergies
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'allergies')].humanReadableValues[0]
+    - name: allergies_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'allergies_other')].values[0]
+      jsonPath: $[0]
+    - name: surgeries
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'surgeries')].humanReadableValues[0]
+    - name: surgeries_other_gyn_proced
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'surgeries_other_gyn_proced')].values[0]
+      jsonPath: $[0]
+    - name: surgeries_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'surgeries_other')].values[0]
+      jsonPath: $[0]
+    - name: health_conditions
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'health_conditions')].humanReadableValues[0]
+    - name: health_conditions_cancer_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'health_conditions_cancer_other')].values[0]
+      jsonPath: $[0]
+    - name: health_conditions_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'health_conditions_other')].values[0]
+      jsonPath: $[0]
+    - name: preeclampsia_risk
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'preeclampsia_risk')].values[0]
+      jsonPath: $[0]
+    - name: hiv_diagnosis_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hiv_diagnosis_date')].values[0]
+      jsonPath: $[0]
+    - name: hiv_positive
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hiv_positive')].values[0]
+      jsonPath: $[0]
+    - name: tt_immun_status
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt_immun_status')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: flu_immun_status
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'flu_immun_status')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: medications
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'medications')].humanReadableValues[0]
+    - name: medications_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'medications_other')].values[0]
+      jsonPath: $[0]
+    - name: caffeine_intake
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'caffeine_intake')].humanReadableValues[0]
+    - name: tobacco_user
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tobacco_user')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: shs_exposure
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'shs_exposure')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: condom_use
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'condom_use')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: alcohol_substance_enquiry
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'alcohol_substance_enquiry')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: alcohol_substance_use
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'alcohol_substance_use')].humanReadableValues[0]
+    - name: other_substance_use
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'other_substance_use')].values[0]
+      jsonPath: $[0]
+    - name: hiv_risk
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hiv_risk')].values[0]
+      jsonPath: $[0]
+    - name: partner_hiv_status
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'partner_hiv_status')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: partner_hiv_positive
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'partner_hiv_positive')].values[0]
+      jsonPath: $[0]
+    - name: hiv_risk
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hiv_risk')].values[0]
+      jsonPath: $[0]
+    - name: start_date_time
       typeName: varchar
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
