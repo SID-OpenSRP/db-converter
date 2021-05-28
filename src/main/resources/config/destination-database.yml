@@ -97,7 +97,7 @@ destination-database:
       sourceColumnName: json
       jsonPath: $.birthdate
     - name: birthdate_approx
-      typeName: date
+      typeName: boolean
       sourceColumnName: json
       jsonPath: $.birthdateApprox
     - name: date_created
