@@ -43,3 +43,12 @@ source-database:
       ORDER BY ${source-database.tables[4].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[5].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[5].name}
+      WHERE ${source-database.tables[5].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'Physical Exam'
+      ORDER BY ${source-database.tables[5].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
