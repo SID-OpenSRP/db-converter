@@ -1686,3 +1686,370 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
       jsonPath: $[0]
+
+  - name: ${destination-database.schemaName}.counselling_and_treatment
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: source_server_version
+      typeName: integer
+      sourceColumnName: server_version
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: rev
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $._rev
+    - name: team
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.team
+    - name: type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.type
+    - name: team_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.teamId
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: client_database_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.clientDatabaseVersion
+    - name: client_application_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.clientApplicationVersion
+    - name: duration
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.duration
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: entity_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.entityType
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: object_identifiers
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.identifiers
+    - name: details_form_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.formVersion
+    - name: details_app_version_name
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.appVersionName
+    - name: referred_hosp
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referred_hosp')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: referred_hosp_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'referred_hosp_notdone')].humanReadableValues[0]
+    - name: referred_hosp_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'referred_hosp_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: caffeine_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'caffeine_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: caffeine_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'caffeine_counsel_notdone')].humanReadableValues[0]
+    - name: caffeine_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'caffeine_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: tobacco_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tobacco_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: tobacco_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'tobacco_counsel_notdone')].humanReadableValues[0]
+    - name: tobacco_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tobacco_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: shs_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'shs_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: shs_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'shs_counsel_notdone')].humanReadableValues[0]
+    - name: shs_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'shs_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: alcohol_substance_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'alcohol_substance_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: alcohol_substance_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'alcohol_substance_counsel_notdone')].humanReadableValues[0]
+    - name: alcohol_substance_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'alcohol_substance_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: nausea_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'nausea_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: nausea_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'nausea_counsel_notdone')].humanReadableValues[0]
+    - name: nausea_pharma
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'nausea_pharma')].values[0]
+      jsonPath: $[0]
+    - name: heartburn_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'heartburn_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: heartburn_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'heartburn_counsel_notdone')].humanReadableValues[0]
+    - name: heartburn_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'heartburn_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: antacid
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'antacid')].values[0]
+      jsonPath: $[0]
+    - name: leg_cramp_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'leg_cramp_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: leg_cramp_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'leg_cramp_counsel_notdone')].humanReadableValues[0]
+    - name: leg_cramp_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'leg_cramp_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: constipation_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'constipation_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: constipation_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'constipation_counsel_notdone')].humanReadableValues[0]
+    - name: constipation_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'constipation_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: eat_exercise_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'eat_exercise_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: eat_exercise_counsel_notdone
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.obs[?(@.formSubmissionField == 'eat_exercise_counsel_notdone')]["humanReadableValues","values"]
+    - name: eat_exercise_counsel_notdone_other
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'eat_exercise_counsel_notdone_other')].values[0]
+      jsonPath: $[0]
+    - name: hypertension_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hypertension_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: hiv_positive_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'hiv_positive_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: penicillin
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'penicillin')].values[0]
+      jsonPath: $[0]
+    - name: asb_positive_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'asb_positive_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: antibiotic
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'antibiotic')].values[0]
+      jsonPath: $[0]
+    - name: ifa_medication
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'ifa_medication')].values[0]
+      jsonPath: $[0]
+    - name: aspirin
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'aspirin')].values[0]
+      jsonPath: $[0]
+    - name: prep
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'prep')].values[0]
+      jsonPath: $[0]
+    - name: gdm_risk_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gdm_risk_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: danger_signs_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'danger_signs_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: emergency_hosp_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'emergency_hosp_counsel')].values[0]
+      jsonPath: $[0]
+    - name: anc_contact_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'anc_contact_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: birth_prep_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'birth_prep_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: delivery_place
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'delivery_place')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: gbs_agent_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'gbs_agent_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: family_planning_counsel
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'family_planning_counsel')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: family_planning_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'family_planning_type')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: tt1_date
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt1_date')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: tt1_dose_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt1_dose_number')].values[0]
+      jsonPath: $[0]
+    - name: tt1_date_done_date_today_hidden
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt1_date_done_date_today_hidden')].values[0]
+      jsonPath: $[0]
+    - name: tt1_date_done
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt1_date_done')].values[0]
+      jsonPath: $[0]
+    - name: tt2_dose_number
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt2_dose_number')].values[0]
+      jsonPath: $[0]
+    - name: tt2_date_done_date_today_hidden
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'tt2_date_done_date_today_hidden')].values[0]
+      jsonPath: $[0]
+    - name: flu_date_done_date_today_hidden
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'flu_date_done_date_today_hidden')].values[0]
+      jsonPath: $[0]
+    - name: start_date_time
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
+      jsonPath: $[0]
