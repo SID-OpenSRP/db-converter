@@ -2053,3 +2053,112 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'start')].values[0]
       jsonPath: $[0]
+
+  - name: ${destination-database.schemaName}.contact_visit
+    columns:
+    - name: event_id
+      typeName: varchar
+      sourceColumnName: id
+      isUnique: true
+    - name: base_entity_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.baseEntityId
+    - name: source_date_deleted
+      typeName: timestamp
+      sourceColumnName: date_deleted
+    - name: source_server_version
+      typeName: integer
+      sourceColumnName: server_version
+    - name: document_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $._id
+    - name: rev
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $._rev
+    - name: team
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.team
+    - name: type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.type
+    - name: team_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.teamId
+    - name: client_version_epoch
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.version
+    - name: server_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.serverVersion
+    - name: client_database_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.clientDatabaseVersion
+    - name: client_application_version
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.clientApplicationVersion
+    - name: duration
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.duration
+    - name: event_date
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.eventDate
+    - name: entity_type
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.entityType
+    - name: location_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.locationId
+    - name: provider_id
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.providerId
+    - name: date_created
+      typeName: timestamp with time zone
+      sourceColumnName: json
+      jsonPath: $.dateCreated
+    - name: form_submission_id
+      typeName: varchar
+      typeLength: 36
+      sourceColumnName: json
+      jsonPath: $.formSubmissionId
+    - name: object_identifiers
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.identifiers
+    - name: details_contact
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.Contact
+    - name: details_open_test_tasks
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.open_test_tasks
+    - name: details_previous_contacts
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.previous_contacts
+    - name: details_form_submission_ids
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.form_submission_ids
+    - name: details_attention_flag_facts
+      typeName: varchar
+      sourceColumnName: json
+      jsonPath: $.details.attention_flag_facts
