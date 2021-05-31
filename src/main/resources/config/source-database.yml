@@ -88,3 +88,12 @@ source-database:
       ORDER BY ${source-database.tables[9].idColumnName} ASC
     idColumnName: id
     lastId: 0
+
+  - destinationTableName: ${destination-database.tables[10].name}
+    name: core.event
+    query: SELECT * FROM ${source-database.tables[10].name}
+      WHERE ${source-database.tables[10].idColumnName} > %s
+      AND "json" ->> 'eventType' = 'ANC Close'
+      ORDER BY ${source-database.tables[10].idColumnName} ASC
+    idColumnName: id
+    lastId: 0
