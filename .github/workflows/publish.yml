@@ -86,13 +86,6 @@ jobs:
       - name: Download JAR from build
         uses: actions/download-artifact@v2
 
-      - name: Create a Release
-        uses: elgohr/Github-Release-Action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          args: ${{ github.ref }}
-
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
