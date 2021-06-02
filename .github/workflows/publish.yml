@@ -95,10 +95,14 @@ jobs:
       - name: Debug basename
         run: basename *.jar
 
+      - name: Set file name
+        run: echo "::set-output name=FILE_NAME::`basename *.jar`"
+        id: file-name-setter
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            `basename *.jar`
+            ${{ steps.file-name-setter.outputs.FILE_NAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
