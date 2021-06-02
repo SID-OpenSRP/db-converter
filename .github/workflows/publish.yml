@@ -91,7 +91,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
-          args: ${{ github.sha }}
+          args: ${{ github.ref }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
