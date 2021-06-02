@@ -1,5 +1,10 @@
 name: Run Tests
-on: push
+
+on:
+  push:
+    branches-ignore: [ main ]
+  pull_request:
+    branches-ignore: [ main ]
 
 jobs:
   # Label of the container job
@@ -39,8 +44,8 @@ jobs:
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
+          java-version: "11"
+          distribution: "adopt"
 
       - name: Configure migrations
         run: chmod +x configs/assets/migrations/run_mybatis_migrations.sh && ./configs/assets/migrations/run_mybatis_migrations.sh
