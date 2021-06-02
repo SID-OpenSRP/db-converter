@@ -92,10 +92,13 @@ jobs:
       - name: Debug directory listing
         run: ls -al
 
+      - name: Debug basename
+        run: basename *.jar
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            executable-jar/*.jar
+            `basename *.jar`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
