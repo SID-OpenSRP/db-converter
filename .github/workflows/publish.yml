@@ -67,6 +67,7 @@ jobs:
     - name: Upload JAR
       uses: actions/upload-artifact@v2
       with:
+        name: executable-jar
         path: build/libs/*
 
     - name: Cleanup Gradle Cache
@@ -85,12 +86,17 @@ jobs:
 
       - name: Download JAR from build
         uses: actions/download-artifact@v2
+        with:
+          name: executable-jar
+
+      - name: Debug directory listing
+        run: ls -al
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            *.jar
+            executable-jar/*.jar
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
