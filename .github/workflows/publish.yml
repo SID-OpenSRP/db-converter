@@ -89,7 +89,7 @@ jobs:
       - name: Create a Release
         uses: elgohr/Github-Release-Action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           args: ${{ github.sha }}
 
