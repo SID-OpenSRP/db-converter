@@ -2,9 +2,9 @@ name: Run Tests
 
 on:
   push:
-    branches-ignore: [ main ]
+    branches-ignore: [main, app/*]
   pull_request:
-    branches-ignore: [ main ]
+    branches-ignore: [main, app/*]
 
 jobs:
   # Label of the container job
