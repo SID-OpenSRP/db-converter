@@ -89,12 +89,6 @@ jobs:
         with:
           name: executable-jar
 
-      - name: Debug directory listing
-        run: ls -al
-
-      - name: Debug basename
-        run: basename *.jar
-
       - name: Set file name
         run: echo "::set-output name=FILE_NAME::`basename *.jar`"
         id: file-name-setter
