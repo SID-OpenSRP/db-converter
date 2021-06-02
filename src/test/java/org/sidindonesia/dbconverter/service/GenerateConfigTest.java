@@ -6,11 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.jayway.jsonpath.JsonPath;
 
 class GenerateConfigTest {
+	@Disabled
 	@Test
 	void testGenerateConfigProperties() throws Exception {
 		String jsonContent = Files.readString(Path.of("D:\\SourceCodes\\SID\\tes.json"));
