@@ -1,9 +1,10 @@
-name: Test
+name: Run Tests
 on: push
 
 jobs:
   # Label of the container job
   run-tests:
+    name: Run Tests
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
 
