@@ -19,7 +19,7 @@ public class ConvertService {
 	private final SourceDatabaseService sourceDatabaseService;
 	private final DestinationDatabaseService destinationDatabaseService;
 
-	@Scheduled(fixedRateString = "${fixedRate.in.milliseconds}")
+	@Scheduled(fixedRateString = "${scheduling.fixed-rate-in-ms}", initialDelayString = "${scheduling.initial-delay-in-ms}")
 	public void convert() {
 		// TODO change log level to debug
 		log.info("Retrieving all required rows from Source DB...");
