@@ -101,6 +101,9 @@ public final class SQLTypeUtil {
 		Object convertedObject;
 
 		String stringValue = String.valueOf(object);
+		if (stringValue == null || stringValue.equalsIgnoreCase("null")) {
+			return null;
+		}
 
 		switch (type) {
 		case Types.CHAR:
