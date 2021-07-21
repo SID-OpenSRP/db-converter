@@ -2,12 +2,15 @@ source-database:
   tables:
   - destinationTableName: ${destination-database.tables[0].name}
     name: core.client
-    query: SELECT * FROM ${source-database.tables[0].name}
-      WHERE ${source-database.tables[0].idColumnName} > %s
+    query: SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS ${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}
+      FROM ${source-database.tables[0].name}
+      WHERE ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' > '%s'
       AND "json" ->> 'firstName' != '-'
       AND "json" ->> 'lastName' != '-'
-      ORDER BY ${source-database.tables[0].idColumnName} ASC
-    idColumnName: id
+      ORDER BY ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' ASC
+    idColumnName: json
+    jsonPath: $.${source-database.tables[0].jsonPropertyName}
+    jsonPropertyName: dateCreated
 
   - destinationTableName: ${destination-database.tables[1].name}
     name: core.client
