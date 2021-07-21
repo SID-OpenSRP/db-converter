@@ -21,11 +21,15 @@ public class ConvertService {
 
 	@Scheduled(fixedRateString = "${scheduling.fixed-rate-in-ms}", initialDelayString = "${scheduling.initial-delay-in-ms}")
 	public void convert() {
-		// TODO change log level to debug
-		log.info("Retrieving all required rows from Source DB...");
+		log.info("DB Conversion starting...");
+
+		log.debug("Retrieving all required rows from Source DB...");
 		Map<String, List<Map<String, Object>>> allRequiredTables = sourceDatabaseService.loadAll();
 
-		log.info("Processing all required rows from Source DB to Destination DB...");
+		log.debug("Processing all required rows from Source DB to Destination DB...");
 		destinationDatabaseService.processRowsFromSource(allRequiredTables);
+
+		log.info("DB Conversion completed.");
+		log.info("{} tables converted successfully.", allRequiredTables.size());
 	}
 }
