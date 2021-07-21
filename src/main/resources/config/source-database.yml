@@ -4,7 +4,7 @@ source-database:
     name: core.client
     query: SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS ${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}
       FROM ${source-database.tables[0].name}
-      WHERE ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' > '%s'
+      WHERE (${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
       AND "json" ->> 'firstName' != '-'
       AND "json" ->> 'lastName' != '-'
       ORDER BY ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' ASC
