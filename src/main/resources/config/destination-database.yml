@@ -8,7 +8,7 @@ destination-database:
     - name: source_id
       typeName: bigserial
       sourceColumnName: id
-      isUnique: true
+      isUnique: false
     - name: source_date_deleted
       typeName: timestamp
       sourceColumnName: date_deleted
@@ -141,7 +141,7 @@ destination-database:
   - name: ${destination-database.schemaName}.mother_identity
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -297,7 +297,7 @@ destination-database:
   - name: ${destination-database.schemaName}.anc_register
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -549,7 +549,7 @@ destination-database:
   - name: ${destination-database.schemaName}.anc_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -851,7 +851,7 @@ destination-database:
   - name: ${destination-database.schemaName}.lab_test_anc_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1008,7 +1008,7 @@ destination-database:
   - name: ${destination-database.schemaName}.integrated_anc_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1140,7 +1140,7 @@ destination-database:
   - name: ${destination-database.schemaName}.birth_plan
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1257,7 +1257,7 @@ destination-database:
   - name: ${destination-database.schemaName}.pnc_register
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1479,7 +1479,7 @@ destination-database:
   - name: ${destination-database.schemaName}.pnc_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1706,7 +1706,7 @@ destination-database:
   - name: ${destination-database.schemaName}.child_registration
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1777,7 +1777,7 @@ destination-database:
   - name: ${destination-database.schemaName}.neonatal_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -1953,7 +1953,7 @@ destination-database:
   - name: ${destination-database.schemaName}.infant_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2094,7 +2094,7 @@ destination-database:
   - name: ${destination-database.schemaName}.child_immunizations
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2215,7 +2215,7 @@ destination-database:
   - name: ${destination-database.schemaName}.toddler_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2336,7 +2336,7 @@ destination-database:
   - name: ${destination-database.schemaName}.child_register
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2437,7 +2437,7 @@ destination-database:
   - name: ${destination-database.schemaName}.family_planning_register
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2578,7 +2578,7 @@ destination-database:
   - name: ${destination-database.schemaName}.family_planning_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2664,7 +2664,7 @@ destination-database:
   - name: ${destination-database.schemaName}.postpartum_family_planning
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2741,7 +2741,7 @@ destination-database:
   - name: ${destination-database.schemaName}.mother_close
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2847,7 +2847,7 @@ destination-database:
   - name: ${destination-database.schemaName}.anc_close
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -2933,7 +2933,7 @@ destination-database:
   - name: ${destination-database.schemaName}.pnc_close
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -3005,7 +3005,7 @@ destination-database:
   - name: ${destination-database.schemaName}.family_planning_close
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -3086,7 +3086,7 @@ destination-database:
   - name: ${destination-database.schemaName}.child_close
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -3182,7 +3182,7 @@ destination-database:
   - name: ${destination-database.schemaName}.mother_edit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -3338,7 +3338,7 @@ destination-database:
   - name: ${destination-database.schemaName}.child_edit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted
@@ -3404,7 +3404,7 @@ destination-database:
   - name: ${destination-database.schemaName}.family_planning_edit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: source_date_deleted

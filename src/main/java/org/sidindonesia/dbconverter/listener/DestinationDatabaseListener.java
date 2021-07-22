@@ -2,6 +2,7 @@ package org.sidindonesia.dbconverter.listener;
 
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 import java.util.List;
 
@@ -74,22 +75,36 @@ public class DestinationDatabaseListener implements ApplicationListener<Applicat
 	}
 
 	private void syncLastIdOfEachSourceTables() {
-		sourceDatabaseProperties.getTables().parallelStream().forEach(sourceTable -> {
+		sourceDatabaseProperties.getTables().parallelStream().map(sourceTable -> {
 			DestinationTable destinationTable = destinationDatabaseProperties.getTables().stream()
 				.filter(destTable -> destTable.getName().equals(sourceTable.getDestinationTableName())).findAny().get();
 
-			String idColumnName = destinationTable.getColumns().stream()
-				.filter(
-					destinationColumn -> destinationColumn.getSourceColumnName().equals(sourceTable.getIdColumnName()))
-				.map(DestinationColumn::getName).findAny().get();
+			DestinationColumn destinationTableIdColumn = destinationTable.getColumns().stream()
+				.filter(destinationColumn -> sourceTable.getJsonPath() == null
+					? destinationColumn.getSourceColumnName().equals(sourceTable.getIdColumnName())
+					: destinationColumn.getSourceColumnName().equals(sourceTable.getIdColumnName())
+						&& destinationColumn.getJsonPath().equals(sourceTable.getJsonPath()))
+				.findAny().get();
 
-			String query = "SELECT\n" + " CASE\n" + "  WHEN (\n" + "  SELECT\n" + "   COUNT(*)\n" + "  FROM\n" + "   "
-				+ destinationTable.getName() + ")::varchar = '0' THEN '0'\n" + "  ELSE (\n" + "  SELECT\n" + "   "
-				+ idColumnName + "\n" + "  FROM\n" + "   " + destinationTable.getName() + "\n" + "  ORDER BY\n" + "   "
-				+ idColumnName + " DESC\n" + "  LIMIT 1)\n" + " END AS lastId";
+			String query;
+			if (destinationTableIdColumn.getTypeName().contains("time")) {
+				query = createQueryGetLastId(destinationTable, destinationTableIdColumn.getName(), "to_timestamp(0)");
+			} else {
+				query = createQueryGetLastId(destinationTable, destinationTableIdColumn.getName(), "'0'");
+			}
+
 			Object lastId = destinationJdbcOperations.queryForObject(query, Object.class);
 
 			sourceTable.setLastId(lastId);
-		});
+			return sourceTable;
+		}).collect(toSet());
+	}
+
+	private String createQueryGetLastId(DestinationTable destinationTable, String destinationTableIdColumnName,
+		String zeroId) {
+		return "SELECT\n" + " CASE\n" + "  WHEN (\n" + "  SELECT\n" + "   COUNT(*)\n" + "  FROM\n" + "   "
+			+ destinationTable.getName() + ") = 0 THEN " + zeroId + "\n" + "  ELSE (\n" + "  SELECT\n" + "   "
+			+ destinationTableIdColumnName + "\n" + "  FROM\n" + "   " + destinationTable.getName() + "\n"
+			+ "  ORDER BY\n" + "   " + destinationTableIdColumnName + " DESC\n" + "  LIMIT 1)\n" + " END AS lastId";
 	}
 }

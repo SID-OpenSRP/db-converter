@@ -9,4 +9,6 @@ public class SourceTable {
 	private String query;
 	private String idColumnName;
 	private Object lastId;
+	private String jsonPath;
+	private String jsonPropertyName;
 }
