@@ -33,13 +33,15 @@ source-database:
         WHERE
           event_json.obs_data ->> 'formSubmissionField' = 'namaBayi'
         LIMIT 1
-      )
+      ), ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS ${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}
       FROM ${source-database.tables[1].name} c
-      WHERE c.${source-database.tables[1].idColumnName} > %s
+      WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
       AND c."json" ->> 'firstName' = '-'
       AND c."json" ->> 'lastName' = '-'
-      ORDER BY ${source-database.tables[1].idColumnName} ASC
-    idColumnName: id
+      ORDER BY c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' ASC
+    idColumnName: json
+    jsonPath: $.${source-database.tables[1].jsonPropertyName}
+    jsonPropertyName: dateCreated
 
   - destinationTableName: ${destination-database.tables[2].name}
     name: core.event
