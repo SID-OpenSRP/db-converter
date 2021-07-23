@@ -128,7 +128,7 @@ destination-database:
   - name: ${destination-database.schemaName}.anc_registration
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -276,7 +276,7 @@ destination-database:
   - name: ${destination-database.schemaName}.quick_check
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -387,7 +387,7 @@ destination-database:
   - name: ${destination-database.schemaName}.profile
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -805,7 +805,7 @@ destination-database:
   - name: ${destination-database.schemaName}.symptoms_and_follow_up
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -937,7 +937,7 @@ destination-database:
   - name: ${destination-database.schemaName}.physical_exam
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -1278,7 +1278,7 @@ destination-database:
   - name: ${destination-database.schemaName}.tests
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -1690,7 +1690,7 @@ destination-database:
   - name: ${destination-database.schemaName}.counselling_and_treatment
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -2057,7 +2057,7 @@ destination-database:
   - name: ${destination-database.schemaName}.contact_visit
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -2166,7 +2166,7 @@ destination-database:
   - name: ${destination-database.schemaName}.update_anc_registration
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -2255,7 +2255,7 @@ destination-database:
   - name: ${destination-database.schemaName}.anc_close
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
