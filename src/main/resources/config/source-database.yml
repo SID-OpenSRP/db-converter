@@ -2,7 +2,8 @@ source-database:
   tables:
   - destinationTableName: ${destination-database.tables[0].name}
     name: core.client
-    query: SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS ${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}
+    query: |
+      SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS "${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}"
       FROM ${source-database.tables[0].name}
       WHERE (${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
       AND "json" ->> 'firstName' != '-'
@@ -14,7 +15,8 @@ source-database:
 
   - destinationTableName: ${destination-database.tables[1].name}
     name: core.client
-    query: SELECT c.*, (
+    query: |
+      SELECT c.*, (
       CASE
         WHEN (
         SELECT
@@ -46,7 +48,7 @@ source-database:
           event_json.obs_data ->> 'formSubmissionField' = 'namaBayi'
         LIMIT 1 )
       END ) AS child_full_name,
-      ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS ${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}
+      ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS "${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}"
       FROM ${source-database.tables[1].name} c
       WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
       AND c."json" ->> 'firstName' = '-'
