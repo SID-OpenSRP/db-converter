@@ -29,9 +29,13 @@ spring:
     username: opensrp_admin
     password: admin
     driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
   destination-datasource:
     name: destination
     jdbc-url: jdbc:postgresql://localhost:5432/dbconverter
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
