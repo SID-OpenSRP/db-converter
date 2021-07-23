@@ -33,8 +33,8 @@ public class SourceDatabaseService {
 			List<Map<String, Object>> resultList = namedParameterJdbcTemplate.query(query, columnMapRowMapper::mapRow);
 
 			if (!resultList.isEmpty()) {
-				String columnName = sourceTable.getIdColumnName() + sourceTable.getJsonPath() == null ? ""
-					: "_" + sourceTable.getJsonPropertyName();
+				String columnName = (sourceTable.getJsonPath() == null) ? sourceTable.getIdColumnName()
+					: sourceTable.getIdColumnName() + "_" + sourceTable.getJsonPropertyName();
 				Object lastObjectId = resultList.get(resultList.size() - 1).get(columnName);
 				sourceTable.setLastId(lastObjectId);
 			}
