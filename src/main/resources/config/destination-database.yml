@@ -77,7 +77,7 @@ destination-database:
   - name: ${destination-database.schemaName}.covid_patient_registration
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -327,7 +327,7 @@ destination-database:
   - name: ${destination-database.schemaName}.covid_wbc
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -482,7 +482,7 @@ destination-database:
   - name: ${destination-database.schemaName}.sample_delivery_details
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -657,7 +657,7 @@ destination-database:
   - name: ${destination-database.schemaName}.covid_rdt_test
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -942,7 +942,7 @@ destination-database:
   - name: ${destination-database.schemaName}.covid_xray
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -1082,7 +1082,7 @@ destination-database:
   - name: ${destination-database.schemaName}.patient_diagnostics
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
@@ -1644,7 +1644,7 @@ destination-database:
   - name: ${destination-database.schemaName}.sample_collection
     columns:
     - name: event_id
-      typeName: varchar
+      typeName: bigserial
       sourceColumnName: id
       isUnique: true
     - name: base_entity_id
