@@ -15,25 +15,38 @@ source-database:
   - destinationTableName: ${destination-database.tables[1].name}
     name: core.client
     query: SELECT c.*, (
+      CASE
+        WHEN (
+        SELECT
+          EXISTS(
+          SELECT
+            1
+          FROM
+            core."event" e
+          WHERE
+            e."json" ->> 'baseEntityId' = c."json" ->> 'baseEntityId'
+            AND e."json" ->> 'eventType' = 'Edit Bayi')) THEN (
         SELECT
           event_json.obs_data -> 'values' ->> 0 AS child_full_name
-        FROM (
+        FROM
+          (
           SELECT
-            jsonb_array_elements(
-              (
-                SELECT e."json"
-                FROM core."event" e
-                WHERE e."json" ->> 'baseEntityId' = c."json" ->> 'baseEntityId'
-                AND e."json" ->> 'eventType' = 'Child Registration'
-                ORDER BY e."json" ->> 'dateCreated' DESC
-                LIMIT 1
-              ) -> 'obs'
-            ) AS obs_data
-          ) event_json
+            jsonb_array_elements( ( SELECT e."json" FROM core."event" e WHERE e."json" ->> 'baseEntityId' = c."json" ->> 'baseEntityId' AND e."json" ->> 'eventType' = 'Edit Bayi' ORDER BY e."json" ->> 'dateCreated' DESC LIMIT 1 ) -> 'obs' ) AS obs_data ) event_json
         WHERE
           event_json.obs_data ->> 'formSubmissionField' = 'namaBayi'
-        LIMIT 1
-      ), ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS ${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}
+        LIMIT 1)
+        ELSE (
+        SELECT
+          event_json.obs_data -> 'values' ->> 0 AS child_full_name
+        FROM
+          (
+          SELECT
+            jsonb_array_elements( ( SELECT e."json" FROM core."event" e WHERE e."json" ->> 'baseEntityId' = c."json" ->> 'baseEntityId' AND e."json" ->> 'eventType' = 'Child Registration' ORDER BY e."json" ->> 'dateCreated' DESC LIMIT 1 ) -> 'obs' ) AS obs_data ) event_json
+        WHERE
+          event_json.obs_data ->> 'formSubmissionField' = 'namaBayi'
+        LIMIT 1 )
+      END ) AS child_full_name,
+      ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS ${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}
       FROM ${source-database.tables[1].name} c
       WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
       AND c."json" ->> 'firstName' = '-'
