@@ -89,7 +89,7 @@ destination-database:
     - name: source_id
       typeName: bigserial
       sourceColumnName: id
-      isUnique: true
+      isUnique: false
     - name: source_date_deleted
       typeName: timestamp
       sourceColumnName: date_deleted
