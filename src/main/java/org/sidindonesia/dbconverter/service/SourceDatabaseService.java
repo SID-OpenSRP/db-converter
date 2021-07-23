@@ -27,18 +27,18 @@ public class SourceDatabaseService {
 	public Map<String, List<Map<String, Object>>> loadAll() {
 		Set<SourceTable> requiredTables = sourceDatabaseProperties.getTables();
 
-		return requiredTables.stream().flatMap(table -> {
+		return requiredTables.stream().flatMap(sourceTable -> {
 
-			String query = format(table.getQuery(), table.getLastId());
+			String query = format(sourceTable.getQuery(), sourceTable.getLastId());
 			List<Map<String, Object>> resultList = namedParameterJdbcTemplate.query(query, columnMapRowMapper::mapRow);
 
 			if (!resultList.isEmpty()) {
-				Object lastObjectId = resultList.get(resultList.size() - 1).get(table.getIdColumnName());
-				table.setLastId(lastObjectId);
+				Object lastObjectId = resultList.get(resultList.size() - 1).get(sourceTable.getIdColumnName());
+				sourceTable.setLastId(lastObjectId);
 			}
 
 			Map<String, List<Map<String, Object>>> map = new HashMap<>();
-			map.put(table.getDestinationTableName(), resultList);
+			map.put(sourceTable.getDestinationTableName(), resultList);
 			return map.entrySet().stream();
 		}).collect(toMap(Entry::getKey, Entry::getValue));
 	}
