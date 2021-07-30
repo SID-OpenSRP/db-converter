@@ -1368,11 +1368,6 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumPIH')].values[0]
       jsonPath: $[0]
-    - name: high_risk_post_partum_pregnancy_induced_hypertension
-      typeName: varchar
-      sourceColumnName: json
-      jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskPostPartumPIH')].values[0]
-      jsonPath: $[0]
     - name: high_risk_post_partum_vacuum
       typeName: varchar
       sourceColumnName: json
