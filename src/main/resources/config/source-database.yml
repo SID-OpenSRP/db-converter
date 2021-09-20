@@ -6,7 +6,7 @@ source-database:
       SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS "${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}"
       FROM ${source-database.tables[0].name}
       WHERE (${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}') > '%s'
-      AND c."json" -> 'relationships' ->> 'ibuCaseId' IS NULL
+      AND ${source-database.tables[0].idColumnName} -> 'relationships' ->> 'ibuCaseId' IS NULL
       ORDER BY ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' ASC
     idColumnName: json
     jsonPath: $.${source-database.tables[0].jsonPropertyName}
@@ -50,7 +50,7 @@ source-database:
       ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS "${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}"
       FROM ${source-database.tables[1].name} c
       WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}') > '%s'
-      AND c."json" -> 'relationships' ->> 'ibuCaseId' IS NOT NULL
+      AND c.${source-database.tables[1].idColumnName} -> 'relationships' ->> 'ibuCaseId' IS NOT NULL
       ORDER BY c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' ASC
     idColumnName: json
     jsonPath: $.${source-database.tables[1].jsonPropertyName}
