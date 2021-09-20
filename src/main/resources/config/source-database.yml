@@ -6,8 +6,7 @@ source-database:
       SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS "${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}"
       FROM ${source-database.tables[0].name}
       WHERE (${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}') > '%s'
-      AND "json" ->> 'firstName' != '-'
-      AND "json" ->> 'lastName' != '-'
+      AND c."json" -> 'relationships' ->> 'ibuCaseId' IS NULL
       ORDER BY ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' ASC
     idColumnName: json
     jsonPath: $.${source-database.tables[0].jsonPropertyName}
