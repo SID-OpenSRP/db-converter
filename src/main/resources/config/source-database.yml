@@ -51,8 +51,7 @@ source-database:
       ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS "${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}"
       FROM ${source-database.tables[1].name} c
       WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}') > '%s'
-      AND c."json" ->> 'firstName' = '-'
-      AND c."json" ->> 'lastName' = '-'
+      AND c."json" -> 'relationships' ->> 'ibuCaseId' IS NOT NULL
       ORDER BY c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' ASC
     idColumnName: json
     jsonPath: $.${source-database.tables[1].jsonPropertyName}
