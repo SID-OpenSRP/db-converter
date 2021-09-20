@@ -5,13 +5,13 @@ source-database:
     query: |
       SELECT *, ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' AS "${source-database.tables[0].idColumnName}_${source-database.tables[0].jsonPropertyName}"
       FROM ${source-database.tables[0].name}
-      WHERE (${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
+      WHERE (${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}') > '%s'
       AND "json" ->> 'firstName' != '-'
       AND "json" ->> 'lastName' != '-'
       ORDER BY ${source-database.tables[0].idColumnName} ->> '${source-database.tables[0].jsonPropertyName}' ASC
     idColumnName: json
     jsonPath: $.${source-database.tables[0].jsonPropertyName}
-    jsonPropertyName: dateCreated
+    jsonPropertyName: serverVersion
 
   - destinationTableName: ${destination-database.tables[1].name}
     name: core.client
@@ -50,13 +50,13 @@ source-database:
       END ) AS child_full_name,
       ${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' AS "${source-database.tables[1].idColumnName}_${source-database.tables[1].jsonPropertyName}"
       FROM ${source-database.tables[1].name} c
-      WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}')::timestamp with time zone > '%s'::timestamp with time zone
+      WHERE (c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}') > '%s'
       AND c."json" ->> 'firstName' = '-'
       AND c."json" ->> 'lastName' = '-'
       ORDER BY c.${source-database.tables[1].idColumnName} ->> '${source-database.tables[1].jsonPropertyName}' ASC
     idColumnName: json
     jsonPath: $.${source-database.tables[1].jsonPropertyName}
-    jsonPropertyName: dateCreated
+    jsonPropertyName: serverVersion
 
   - destinationTableName: ${destination-database.tables[2].name}
     name: core.event
