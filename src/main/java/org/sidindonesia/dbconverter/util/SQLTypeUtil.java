@@ -156,18 +156,30 @@ public final class SQLTypeUtil {
 		case Types.DATE:
 			if (stringValue.contains("T"))
 				stringValue = stringValue.substring(0, stringValue.indexOf("T"));
+			if (stringValue.isBlank()) {
+				return null;
+			}
 			convertedObject = LocalDate.parse(stringValue, DATE_FORMATTER);
 			break;
 
 		case Types.TIME:
+			if (stringValue.isBlank()) {
+				return null;
+			}
 			convertedObject = LocalTime.parse(stringValue);
 			break;
 
 		case Types.TIMESTAMP_WITH_TIMEZONE:
+			if (stringValue.isBlank()) {
+				return null;
+			}
 			convertedObject = OffsetDateTime.from(ISO_DATE_TIME.parse(stringValue));
 			break;
 
 		case Types.TIMESTAMP:
+			if (stringValue.isBlank()) {
+				return null;
+			}
 			convertedObject = LocalDateTime.from(ISO_DATE_TIME.parse(stringValue));
 			break;
 
