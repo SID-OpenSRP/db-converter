@@ -1011,6 +1011,16 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'cityVillage')].values[0]
       jsonPath: $[0]
+    - name: has_hiv
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'laboratoriumHiv')].humanReadableValues[0]
+      jsonPath: $[0]
+    - name: treatment_hiv
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'treatmentHivTxt')].values[0]
+      jsonPath: $[0]
 
   # Legacy table name = 'kunjungan_anc_integrasi'
   - name: ${destination-database.schemaName}.integrated_anc_visit
