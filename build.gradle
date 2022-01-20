@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'org.sidindonesia'
-version = '1.1.2'
+version = '1.1.2-RDT'
 sourceCompatibility = '11'
 
 configurations {
