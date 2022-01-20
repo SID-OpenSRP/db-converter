@@ -552,6 +552,11 @@ destination-database:
       sourceColumnName: json
       jsonFilter: $.obs[?(@.formSubmissionField == 'highRiskEctopicPregnancy')].values[0]
       jsonPath: $[0]
+    - name: is_consented_whatsapp
+      typeName: varchar
+      sourceColumnName: json
+      jsonFilter: $.obs[?(@.formSubmissionField == 'pengingat_whatsapp')].values[0]
+      jsonPath: $[0]
 
   # Legacy table name = 'kunjungan_anc'
   - name: ${destination-database.schemaName}.anc_visit
