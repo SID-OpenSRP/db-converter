@@ -28,4 +28,4 @@ Use `./gradlew bootJar` to build the executable jar file. Gradle will build exec
 
 Current version of the `db-converter` is a standalone background application that expects configuration at the runtime - DB user credentials for both the source (read-only access is preferred) and the destination (must have write access). By default, application will run on port 8080. Alternative port can be specified using `server.port` option.
 
-`java -jar db-converter-${DB-CONVERTER_VERSION}.jar --server.port=9000
+`java -jar db-converter-${DB-CONVERTER_VERSION}.jar --server.port=9000`
