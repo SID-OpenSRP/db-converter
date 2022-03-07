@@ -18,7 +18,7 @@ Have a look at:
 
 ### Development
 
-Gradle is used as the software project mananagement tool.
+Gradle is used as the software project management tool.
 
 ### Building
 
